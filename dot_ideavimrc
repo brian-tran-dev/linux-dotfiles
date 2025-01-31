@@ -1,0 +1,76 @@
+inoremap jj <ESC>
+
+let mapleader=" "
+set clipboard=unnamedplus scrolloff=5 notimeout
+set showcmd NERDTree commentary matchit which-key
+
+sethandler <C-a> a:ide
+sethandler <C-b> a:ide
+sethandler <C-c> a:ide
+sethandler <C-d> a:ide
+sethandler <C-f> a:ide
+sethandler <C-h> a:ide
+sethandler <C-j> a:ide
+sethandler <C-k> a:ide
+sethandler <C-l> a:ide
+sethandler <C-n> a:vim
+sethandler <C-p> a:ide
+sethandler <C-q> a:ide
+sethandler <C-r> a:vim
+sethandler <C-v> a:vim
+sethandler <C-w> a:ide
+
+sethandler <A-j> a:vim
+sethandler <A-k> a:vim
+sethandler <A-h> a:vim
+sethandler <A-l> a:vim
+sethandler <A-d> a:vim
+
+
+map <leader>rf <Action>(ReformatCode)
+map <leader>rne <Action>(RenameElement)
+map <leader>rp <Action>(Replace)
+map <leader>rs <Action>(RestartIde)<Enter>
+map <leader>rnf <Action>(RenameFile)
+
+map <leader>ha <Action>(HideAllWindows)
+
+map <leader>da <Action>(ActivateProblemsViewToolWindow)
+map <leader>ds <Action>(ShowErrorDescription)
+map <leader>dl <Action>(GotoNextError)
+map <leader>dh <Action>(GotoPreviousError)
+map <leader>df <Action>(ShowIntentionActions)
+
+map <leader>cfp <Action>(CopyReferencePopupGroup)
+
+map <leader>sd <Action>(QuickJavaDoc)
+
+map <leader>fs <Action>(Switcher)
+map <leader>fd <Action>(ActivateProblemsViewToolWindow)
+map <leader>fr <Action>(ActivateRunToolWindow)
+map <leader>fid <Action>(VimFindActionIdAction)
+
+"nmap gcc <Action>(CommentByLineComment)
+"vmap gc <Action>(CommentByLineComment)<ESC>
+"map [ <Action>(EditorSelectWord)
+"map ] <Action>(EditorUnSelectWord)
+"map % <Action>(EditorMatchBrace)
+"map <C-K> <Action>(MoveLineUp)
+"map <C-J> <Action>(MoveLineDown)
+map <A-k> <Action>(TabShiftActions.MoveFocusUp)
+map! <A-k> <Action>(TabShiftActions.MoveFocusUp)
+map <A-j> <Action>(TabShiftActions.MoveFocusDown)
+map! <A-j> <Action>(TabShiftActions.MoveFocusDown)
+map <A-h> <Action>(TabShiftActions.MoveFocusLeft)
+map! <A-h> <Action>(TabShiftActions.MoveFocusLeft)
+map <A-l> <Action>(TabShiftActions.MoveFocusRight)
+map! <A-l> <Action>(TabShiftActions.MoveFocusRight)
+map <A-d> <Action>(CloseAllEditors)
+map! <A-d> <Action>(CloseAllEditors)
+
+map <leader><S-k> <Action>(TabShiftActions.StretchUp)<Action>(ResizeToolWindowUp)
+map <leader><S-j> <Action>(TabShiftActions.StretchDown)<Action>(ResizeToolWindowDown)
+map <leader><S-h> <Action>(TabShiftActions.StretchLeft)<Action>(ResizeToolWindowLeft)
+map <leader><S-l> <Action>(TabShiftActions.StretchRight)<Action>(ResizeToolWindowRight)
+map <leader><S-a> <Action>(tabshifter.Actions.EqualSizeSplit)<Action>(MaximizeToolWindow)
+set ideajoin
