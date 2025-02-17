@@ -1,0 +1,27 @@
+#browser #main #tabs-container .tab.active.active {
+	background-color: #626373;
+}
+#browser #main #tabs-container .tab {
+	--colorBgAlpha: #41414d;
+}
+#browser #main #tabs-container .tab .tab-header .title {
+	font-size: 14px;
+}
+#browser #main #tabs-container .sync-and-trash-container.left {
+	display: none;
+}
+#browser #main .tabbar-wrapper .tabbar-workspace-button.button-menu {
+	display: none;
+}
+#browser #main #tabs-tabbar-container.left .separator {
+	display: none;
+}
+
+#browser #main .inner > .tabbar-wrapper {
+	position: absolute;
+	left: 40px;
+	top: 0;
+	bottom: 0;
+	z-index: 1;
+	background-color: #2f3038;
+}

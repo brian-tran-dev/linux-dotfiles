@@ -1,0 +1,63 @@
+#browser .window-buttongroup {
+	display: none !important;
+}
+
+#browser:has(.vivaldi-settings) .window-buttongroup {
+	display: flex !important;
+}
+
+#browser .window-buttongroup {
+	right: auto!important;
+	left: 10px;
+	top: 6px!important;
+	gap: 10px;
+	flex-direction: row-reverse;
+}
+
+#browser .window-buttongroup .window-minimize * {
+	display: none;
+}
+#browser .window-buttongroup .window-minimize {
+	width: 14px;
+	height: 14px;
+	background-color: #ba7b11!important;
+	border-radius: 99px;
+}
+#browser .window-buttongroup .window-minimize:hover {
+	background-color: #ffa917!important;
+}
+#browser .window-buttongroup .window-minimize:active {
+	background-color: #ffff00!important;
+}
+
+#browser .window-buttongroup .window-maximize * {
+	display: none;
+}
+#browser .window-buttongroup .window-maximize {
+	width: 14px;
+	height: 14px;
+	background-color: #10b334!important;
+	border-radius: 99px;
+}
+#browser .window-buttongroup .window-maximize:hover {
+	background-color: #14e643!important;
+}
+#browser .window-buttongroup .window-maximize:active {
+	background-color: #16ff4a!important;
+}
+
+#browser .window-buttongroup .window-close * {
+	display: none;
+}
+#browser .window-buttongroup .window-close {
+	width: 14px;
+	height: 14px;
+	background-color: #b33b3f!important;
+	border-radius: 99px;
+}
+#browser .window-buttongroup .window-close:hover {
+	background-color: #e64b50!important;
+}
+#browser .window-buttongroup .window-close:active {
+	background-color: #ff5359!important;
+}

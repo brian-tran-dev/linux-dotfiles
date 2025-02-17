@@ -1,0 +1,32 @@
+#browser #main.left #panels #switch .ToolbarButton-Button:hover {
+	color: #f6c177;
+	background-color: #4a4c59;
+}
+#browser #main.left #panels #switch .ToolbarButton-Button.button-pressed {
+	background-color: #4a4c59;
+	border: 1px solid #f6c177;
+}
+#browser #main.left #panels #switch .ToolbarButton-Button.uifocusstop {
+	background-color: #4a4c59;
+	border: 1px solid #f6c177;
+}
+
+#browser #main.left #panels #switch .page-zoom-controls .button-toolbar {
+	display: none;
+}
+
+#browser #main.left #panels #switch .ToolbarButton-Button[title=ToggleTabBar] svg {
+	display: none;
+}
+#browser #main.left #panels #switch .ToolbarButton-Button[title=ToggleTabBar] *:has(>svg) {
+	background-image: url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20stroke-width%3D%220%22%2F%3E%3Cg%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M11%205v14M6%208h2m-2%203h2m-2%203h2m-1.8%205h11.6c1.12%200%201.68%200%202.108-.218a2%202%200%200%200%20.874-.874C21%2017.48%2021%2016.92%2021%2015.8V8.2c0-1.12%200-1.68-.218-2.108a2%202%200%200%200-.874-.874C19.48%205%2018.92%205%2017.8%205H6.2c-1.12%200-1.68%200-2.108.218a2%202%200%200%200-.874.874C3%206.52%203%207.08%203%208.2v7.6c0%201.12%200%201.68.218%202.108a2%202%200%200%200%20.874.874C4.52%2019%205.08%2019%206.2%2019%22%20stroke%3D%22%23fff%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+	background-size: 24px 24px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#browser #main.left #panels #switch .ToolbarButton-Button[title=ToggleTabBar]:hover *:has(>svg) {
+	background-image: url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20stroke-width%3D%220%22%2F%3E%3Cg%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M11%205v14M6%208h2m-2%203h2m-2%203h2m-1.8%205h11.6c1.12%200%201.68%200%202.108-.218a2%202%200%200%200%20.874-.874C21%2017.48%2021%2016.92%2021%2015.8V8.2c0-1.12%200-1.68-.218-2.108a2%202%200%200%200-.874-.874C19.48%205%2018.92%205%2017.8%205H6.2c-1.12%200-1.68%200-2.108.218a2%202%200%200%200-.874.874C3%206.52%203%207.08%203%208.2v7.6c0%201.12%200%201.68.218%202.108a2%202%200%200%200%20.874.874C4.52%2019%205.08%2019%206.2%2019%22%20stroke%3D%22%23f6c177%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+}
+
+
