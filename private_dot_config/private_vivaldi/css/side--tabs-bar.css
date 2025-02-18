@@ -1,27 +1,92 @@
-#browser #main #tabs-container .tab.active.active {
+#browser #main .inner > .tabbar-wrapper {
+	position: absolute;
+	left: 48px;
+	top: 50%;
+	transform: translateY(-50%);
+	height: calc(100vh - 60px);
+	z-index: 1;
+	background-color: #2f3038;
+	border-radius: 8px;
+	overflow: hidden;
+	border: 2px solid #6b6d80;
+}
+
+#browser.fullscreen #main .inner > .tabbar-wrapper {
+	height: calc(100vh - 32px);
+}
+
+#browser #main #tabs-tabbar-container {
+	padding: 0px;
+}
+
+#browser #main #tabs-container .tab-strip .tab-position {
+	padding: 0 8px;
+}
+
+#browser #main #tabs-container .tab-strip .tab-position .newtab {
+	left: unset!important;
+	width: 100%;
+	margin-top: 10px;
+}
+#browser #main #tabs-container .tab-strip .tab-position .newtab button {
+	border: 2px solid #f6c177;
+}
+#browser #main #tabs-container .tab-strip .tab-position .newtab button:hover {
+	width: 100%;
+	background-color: #41414d;
+}
+#browser #main #tabs-container .tab-strip .tab-position .newtab button:active {
 	background-color: #626373;
+}
+#browser #main #tabs-container .tab-strip .tab-position:has(.newtab):hover svg {
+	color: #f6c177;
+}
+
+#browser #main #tabs-container .tab-strip .tab-position .tab-wrapper {
+	margin: 0;
 }
 #browser #main #tabs-container .tab {
 	--colorBgAlpha: #41414d;
+	padding: 4px;
+	width: 100%;
+	justify-content: center;
+}
+#browser #main #tabs-container .tab.active.active {
+	background-color: #626373;
 }
 #browser #main #tabs-container .tab .tab-header .title {
 	font-size: 14px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
+
 #browser #main #tabs-container .sync-and-trash-container.left {
-	display: none;
-}
-#browser #main .tabbar-wrapper .tabbar-workspace-button.button-menu {
 	display: none;
 }
 #browser #main #tabs-tabbar-container.left .separator {
 	display: none;
 }
 
-#browser #main .inner > .tabbar-wrapper {
-	position: absolute;
-	left: 40px;
-	top: 0;
-	bottom: 0;
-	z-index: 1;
-	background-color: #2f3038;
+#browser #main .tabbar-wrapper .tabbar-workspace-button {
+	padding: 12px;
 }
+#browser #main .tabbar-wrapper .tabbar-workspace-button .ToolbarButton-Button {
+	padding: 0 6px;
+	background-color: #4a4c59;
+}
+#browser #main .tabbar-wrapper .tabbar-workspace-button .ToolbarButton-Button svg path {
+	stroke-width: 1.5px;
+}
+#browser #main .tabbar-wrapper .tabbar-workspace-button .ToolbarButton-Button .button-title {
+	font-weight: bold;
+	font-size: 13px;
+}
+#browser #main .tabbar-wrapper .tabbar-workspace-button .ToolbarButton-Button:hover {
+	color: #f6c177;
+	background-color: #4a4c59;
+}
+#browser #main .tabbar-wrapper .tabbar-workspace-button .ToolbarButton-Button.button-pressed {
+	border: 1px solid #f6c177;
+}
+
