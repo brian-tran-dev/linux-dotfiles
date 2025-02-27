@@ -1,3 +1,7 @@
+#browser #main.left #panels-container {
+	border-right: 1px solid #6b6d80;
+}
+
 #browser #main.left #panels #switch .ToolbarButton-Button:hover {
 	color: #f6c177;
 	background-color: #4a4c59;
