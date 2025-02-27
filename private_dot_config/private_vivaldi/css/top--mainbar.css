@@ -4,9 +4,10 @@
 }
 
 #browser .mainbar .toolbar {
-	height: 80px;
+	height: 41px;
 	padding-right:10px !important;
 	padding-left:4px;
+	border-bottom: 1px solid #6b6d80;
 }
 
 #browser .mainbar .toolbar .UrlBar-AddressField *:has(>svg) {
@@ -21,6 +22,7 @@
 	background-color: #43444d;
 	font-size: 16px;
 	font-weight: 600;
+	margin: 0 16px;
 }
 
 #browser .mainbar .toolbar .UrlBar-AddressField:has(#urlFieldInput:focus) {
@@ -81,4 +83,15 @@
 	width: auto;
 	height: auto;
 	border: none;
+}
+
+#browser .mainbar .toolbar .UrlBar-AddressField .pageload progress.pageload-indicator {
+	background-color: #f6c177;
+	top: calc(100% - 4px);
+	left: 12px;
+	right: 12px;
+}
+#browser .mainbar .toolbar .UrlBar-AddressField .pageload progress.pageload-indicator::-webkit-progress-value {
+	border-radius: 0px;
+	background-color: #155dfc;
 }
