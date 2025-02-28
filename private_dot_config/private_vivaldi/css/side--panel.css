@@ -1,5 +1,5 @@
 #browser #main.left #panels-container {
-	border-right: 1px solid #6b6d80;
+	border-right: 2px solid #6b6d80;
 }
 
 #browser #main.left #panels #switch .ToolbarButton-Button:hover {
@@ -38,10 +38,9 @@
 }
 
 #browser #main.left #panels .panel-group {
-	left: 48px!important;
+	left: 56px!important;
 	top: 16px;
 	bottom: 16px;
 	border-radius: 8px;
 	border: 2px solid #6b6d80;;
 }
-

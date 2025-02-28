@@ -3,7 +3,7 @@
 	left: 56px;
 	transform: translateY(-50%);
 	top: 50%;
-	height: calc(100vh - 32px);
+	height: calc(100vh - 38px);
 	z-index: 1;
 	background-color: #2f3038;
 	border-radius: 8px;
@@ -12,17 +12,17 @@
 }
 
 #browser.address-top-off:has(#titlebar) #main .inner > .tabbar-wrapper {
-	height: calc(100vh - 32px - 28px);
+	height: calc(100vh - 38px - 28px);
 }
 #browser:not(.address-top-off):has(#titlebar) #main .inner > .tabbar-wrapper {
-	height: calc(100vh - 32px - 69px);
+	height: calc(100vh - 38px - 69px);
 }
 #browser:not(.address-top-off, :has(#titlebar)) #main .inner > .tabbar-wrapper {
-	height: calc(100vh - 32px - 41px);
+	height: calc(100vh - 38px - 41px);
 }
 #browser.fullscreen #main .inner > .tabbar-wrapper {
 	top: 50%;
-	height: calc(100vh - 32px);
+	height: calc(100vh - 38px);
 }
 
 #browser #main #tabs-tabbar-container {

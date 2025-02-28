@@ -7,7 +7,7 @@
 	height: 41px;
 	padding-right:10px !important;
 	padding-left:4px;
-	border-bottom: 1px solid #6b6d80;
+	border-bottom: 2px solid #6b6d80;
 }
 
 #browser .mainbar .toolbar .UrlBar-AddressField *:has(>svg) {
@@ -88,10 +88,37 @@
 #browser .mainbar .toolbar .UrlBar-AddressField .pageload progress.pageload-indicator {
 	background-color: #f6c177;
 	top: calc(100% - 4px);
-	left: 12px;
-	right: 12px;
+	left: 14px;
+	right: 14px;
+	border-radius: 0px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
+
 #browser .mainbar .toolbar .UrlBar-AddressField .pageload progress.pageload-indicator::-webkit-progress-value {
 	border-radius: 0px;
-	background-color: #155dfc;
+	background-color: #2b7fff;
+}
+
+#browser .mainbar .toolbar .UrlBar-AddressField .pageload.progressing progress.pageload-indicator:not([value="0"])::-webkit-progress-value {
+	transition: width 0.5s linear !important;
+}
+
+#browser .mainbar .toolbar .UrlBar-AddressField .pageload.progressing,
+#browser .mainbar .toolbar .UrlBar-AddressField .pageload.progressing .pageload-indicator,
+#browser .mainbar .toolbar .UrlBar-AddressField .pageload.progressing .pageload-ticker {
+	opacity: 1;
+}
+
+#browser .mainbar .toolbar .UrlBar-AddressField .pageload.progress-done:not(.progressing),
+#browser .mainbar .toolbar .UrlBar-AddressField .pageload.progress-done:not(.progressing) progress.pageload-indicator,
+#browser .mainbar .toolbar .UrlBar-AddressField .pageload.progress-done:not(.progressing) progress.pageload-ticker
+{
+	animation: linear forwards page-load-animation-1;
+	animation-duration: 0.5s !important;
+}
+@keyframes page-load-animation-1 {
+	0% { opacity: 1 }
+	99.99% { opacity: 1 }
+	100% { opacity: 0 }
 }
