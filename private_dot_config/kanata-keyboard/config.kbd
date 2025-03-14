@@ -1,0 +1,38 @@
+(defcfg
+	process-unmapped-keys no
+	linux-dev-names-include (
+		"AT Translated Set 2 keyboard"
+	)
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lalt           spc            ralt rmet rctl
+)
+
+(deflayer qwerty
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  lctl a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  @vim lalt           spc            ralt rmet rctl
+)
+
+(deflayer vim-like
+  nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0
+  nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 bspc ret  nop0 nop0 nop0 nop0
+  caps nop0 lsft del  nop0 nop0 left down up   rght nop0 nop0 nop0
+  nop0 nop0 del  lctl nop0 nop0 home pgdn pgup end  nop0 nop0
+  nop0 lalt           nop0           nop0 nop0 nop0
+)
+
+(defalias
+	vim  (layer-toggle vim-like)
+)
+
+(defoverrides
+	(lctl [) (esc)
+)

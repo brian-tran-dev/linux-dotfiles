@@ -4,7 +4,7 @@
 }
 
 #browser .mainbar .toolbar {
-	height: 41px;
+	height: 32px;
 	padding-right:10px !important;
 	padding-left:4px;
 	border-bottom: 2px solid #6b6d80;
@@ -15,9 +15,9 @@
 }
 
 #browser .mainbar .toolbar .UrlBar-AddressField {
-	height: 40px;
-	padding: 0 2px;
-	border-radius: 999px;
+	height: 30px;
+	padding: 0 4px;
+	border-radius: 99px;
 	border-width: 0;
 	background-color: #43444d;
 	font-size: 16px;
@@ -57,25 +57,43 @@
 }
 
 #browser .mainbar .toolbar .UrlBar-AddressField .UrlField+.OmniDropdown ul>li>span:not(:has(svg)) {
-	height: 20px;
+	height: 16px;
 }
 
-#browser .mainbar .toolbar .UrlBar-AddressField .button-toolbar button *:not(svg) {
+#browser .mainbar .toolbar .UrlBar-AddressField .button-toolbar,
+#browser .mainbar .toolbar .UrlBar-AddressField .button-toolbar *:has(svg),
+#browser .mainbar .toolbar .UrlBar-AddressField .button-toolbar svg {
+	margin: 0px!important;
+	padding: 0px!important;
+	border: none!important;
+	background-color: transparent!important;
+	color: white;
+}
+#browser .mainbar .toolbar .UrlBar-AddressField .button-toolbar button {
+	width: 22px;
+	height: 22px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 24px;
-	height: 24px;
 }
-#browser .mainbar .toolbar .UrlBar-AddressField .button-toolbar button {
-	border-radius: 99px;
-	width: 32px;
-	height: 32px;
-	padding: 0px!important;
+#browser .mainbar .toolbar .UrlBar-AddressField .button-toolbar button *:has(svg) {
+	display: contents;
 }
-#browser .mainbar .toolbar .UrlBar-AddressField .button-toolbar button:hover {
-	background-color: #2e2f37;
-	border-color: transparent;
+#browser .mainbar .toolbar .UrlBar-AddressField .button-toolbar button svg {
+	width: 16px;
+	height: 16px;
+	transition: transform !important;
+}
+#browser .mainbar .toolbar .UrlBar-AddressField .button-toolbar button:hover svg {
+	transform: scale(calc(22/16));
+	color: #f6c177;
+}
+#browser .mainbar .toolbar .UrlBar-AddressField .button-toolbar button:active {
+	opacity: 1;
+}
+#browser .mainbar .toolbar .UrlBar-AddressField .button-toolbar button:active svg {
+	transform: scale(calc(20/16));
+	filter: opacity(1);
 }
 
 #browser .mainbar .toolbar .UrlBar-AddressField .toolbar:has(.button-toolbar),
@@ -88,8 +106,8 @@
 #browser .mainbar .toolbar .UrlBar-AddressField .pageload progress.pageload-indicator {
 	background-color: #f6c177;
 	top: calc(100% - 4px);
-	left: 14px;
-	right: 14px;
+	left: 8px;
+	right: 8px;
 	border-radius: 0px;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;

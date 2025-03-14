@@ -18,7 +18,7 @@
 	height: calc(100vh - 38px - 69px);
 }
 #browser:not(.address-top-off, :has(#titlebar)) #main .inner > .tabbar-wrapper {
-	height: calc(100vh - 38px - 41px);
+	height: calc(100vh - 38px - 32px);
 }
 #browser.fullscreen #main .inner > .tabbar-wrapper {
 	top: 50%;
