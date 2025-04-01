@@ -79,7 +79,7 @@ end
 # pnpm end
 
 # texlive
-set -gxp MANPATH /home/brian/.local/texlive/2024/texmf-dist/doc/man
-set -gxp INFOPATH /home/brian/.local/texlive/2024/texmf-dist/doc/info
-set -gxp PATH /home/brian/.local/texlive/2024/bin/x86_64-linux
+set -gxp MANPATH /home/brian/.local/texlive/2025/texmf-dist/doc/man
+set -gxp INFOPATH /home/brian/.local/texlive/2025/texmf-dist/doc/info
+set -gxp PATH /home/brian/.local/texlive/2025/bin/x86_64-linux
 # texlive end

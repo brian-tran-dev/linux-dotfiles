@@ -1,0 +1,35 @@
+#browser #modal-bg.qc-modal {
+	--colorBgIntense: #4a4c59;
+	--colorBgLight: #4a4c59;
+	--colorBg: #4a4c59;
+	top: 15vh;
+}
+
+#browser #modal-bg.qc-modal .modal-wrapper {
+	border-radius: 14px;
+	border: 2px solid #6b6d80;
+	background-color: #4a4c59;
+}
+
+#browser #modal-bg.qc-modal .modal-wrapper .quick-command-container {
+	--m-width: min(max(40em, 65vw), 80em);
+	width: var(--m-width);
+}
+#browser #modal-bg.qc-modal .modal-wrapper .quick-command-container .quick-commands>div {
+	width: var(--m-width)!important;
+}
+#browser #modal-bg.qc-modal .modal-wrapper .quick-command-container .quick-commands>div>div {
+	max-width: var(--m-width)!important;
+}
+
+#browser #modal-bg.qc-modal .modal-wrapper .quick-command-container .quick-command-sectionheader {
+	font-size: 14px;
+}
+#browser #modal-bg.qc-modal .modal-wrapper .quick-command-container .quick-command-title {
+	font-size: 16px;
+}
+#browser #modal-bg.qc-modal .modal-wrapper .quick-command-container .item-count,
+#browser #modal-bg.qc-modal .modal-wrapper .quick-command-container .quick-command-timestamp, 
+#browser #modal-bg.qc-modal .modal-wrapper .quick-command-container .quick-command-meta {
+	font-size: 15px;
+}

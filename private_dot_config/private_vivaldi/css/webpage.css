@@ -1,10 +1,13 @@
+#browser #main #webview-container .webpageview.visible.pagefocusstop {
+	--animation-duration: 150ms;
+}
 #browser #main #webview-container .webpageview.visible.pagefocusstop::before {
 	content: " ";
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	letter-spacing: 4px;
 	pointer-events: none;
 	animation: ease-in forwards tab-focus-animation;
-	animation-duration: 1000ms !important;
+	animation-duration: var(--animation-duration) !important;
 	animation-iteration-count: 1;
 	font-size: 20px;
 	color: #e2e8f0;
@@ -28,7 +31,7 @@
 	content: " ";
 	pointer-events: none;
 	animation: ease-in forwards tab-focus-animation;
-	animation-duration: 1000ms !important;
+	animation-duration: var(--animation-duration) !important;
 	animation-iteration-count: 1;
 	position: absolute;
 	top: calc(50% - 55px);

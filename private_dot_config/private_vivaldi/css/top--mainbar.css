@@ -3,11 +3,16 @@
 	background-color: #2e2f37;
 }
 
-#browser .mainbar .toolbar {
-	height: 32px;
+#browser.address-top .mainbar .toolbar {
+	height: 33px!important;
+	min-height: 33px!important;
 	padding-right:10px !important;
-	padding-left:4px;
+	padding: 0px !important;
 	border-bottom: 2px solid #6b6d80;
+}
+
+#browser .mainbar .toolbar .vivaldi {
+	display: none;
 }
 
 #browser .mainbar .toolbar .UrlBar-AddressField *:has(>svg) {
@@ -22,7 +27,7 @@
 	background-color: #43444d;
 	font-size: 16px;
 	font-weight: 600;
-	margin: 0 16px;
+	margin: 0 12px;
 }
 
 #browser .mainbar .toolbar .UrlBar-AddressField:has(#urlFieldInput:focus) {

@@ -17,6 +17,7 @@ end
 function M.get_discrete_gpu()
 	for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
 		if gpu.backend == "Vulkan" and gpu.device_type == "DiscreteGpu" then
+			wezterm.log_info(gpu)
 			return gpu
 		end
 	end

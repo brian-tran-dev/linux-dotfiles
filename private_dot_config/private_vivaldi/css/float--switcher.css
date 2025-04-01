@@ -1,0 +1,27 @@
+#browser #modal-bg.modal-tabswitcher .listed-tabs .visual-list {
+	font-size: 18px;
+}
+#browser #modal-bg.modal-tabswitcher .listed-tabs .visual-list.active-page {
+	font-weight: bold;
+}
+#browser #modal-bg.modal-tabswitcher .listed-tabs .visual-list.active-page:not(.selected) {
+	background-color: transparent;
+}
+#browser:has(#panels-container.minimized) #modal-bg.modal-tabswitcher {
+	left: 28px;
+}
+#browser #modal-bg.modal-tabswitcher .tabswitcher.list {
+	--m-width: min(90vw, calc(100vw - 80px));
+	--m-list-width: max(36em, 60vw);
+	--m-preview-width: calc(var(--m-width) - var(--m-list-width));
+	width: var(--m-width); 
+	grid-template-columns: var(--m-preview-width) 1fr;
+	background-color: #4a4c59;
+	border: 3px solid #6b6d80;
+}
+#browser #modal-bg.modal-tabswitcher .tabswitcher.list .visual-list-preview {
+	min-width: var(--m-preview-width);
+	width: var(--m-preview-width);
+	height: auto;
+	object-fit: contain;
+}

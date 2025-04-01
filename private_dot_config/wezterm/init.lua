@@ -8,7 +8,16 @@ local status = require("config.status")
 
 local config = wezterm.config_builder()
 
-config.webgpu_preferred_adapter = misc.get_discrete_gpu()
+-- wezterm.log_info()misc.get_discrete_gpu())
+config.webgpu_preferred_adapter = {
+    backend = "Vulkan",
+    device = 8081,
+    device_type = "DiscreteGpu",
+    driver = "NVIDIA",
+    driver_info = "535.183.01",
+    name = "NVIDIA GeForce GTX 1650",
+    vendor = 4318,
+}
 config.front_end = "WebGpu"
 config.enable_wayland = false
 
