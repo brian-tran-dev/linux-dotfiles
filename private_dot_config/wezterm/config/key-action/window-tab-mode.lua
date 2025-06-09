@@ -3,7 +3,9 @@ local act = wezterm.action
 local tab = require("core.tab")
 
 return {
-	set_name = function(gui_window, _, input_name)
+	set_name = function(gui_window, input_name)
+		if input_name == nil then return end
+
 		local active_tab = gui_window:active_tab()
 		local tab_id = active_tab:tab_id()
 		local new_name = nil

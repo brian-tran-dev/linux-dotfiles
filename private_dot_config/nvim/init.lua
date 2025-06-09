@@ -23,10 +23,20 @@ vim.keymap.set("n", "<BS>", ":noh<Enter>", { noremap = true, desc = "Remove High
 vim.keymap.set("n", "<leader>oh", function ()
 	vim.cmd[[ edit vim.fn.expand('%:p:h') ]]
 end, { noremap = true, desc = "Open on cursor" })
-vim.keymap.set("n", "<leader>spb", function ()
+vim.keymap.set("n", "<leader>bh", function ()
 	vim.cmd[[ bprevious ]]
 end, { noremap = true, desc = "Previous Buffer" })
-vim.keymap.set("n", "<leader>snb", function ()
+vim.keymap.set("n", "<leader>bl", function ()
 	vim.cmd[[ bnext ]]
 end, { noremap = true, desc = "Next Buffer" })
-
+vim.keymap.set("n", "<leader>bl", function ()
+	vim.cmd[[ bnext ]]
+end, { noremap = true, desc = "Next Buffer" })
+vim.keymap.set(
+	{"n", "i"}, "<c-h>", "<c-o>",
+	{ noremap = true, desc = "Previous Jump" }
+)
+vim.keymap.set(
+	{"n", "i"}, "<c-l>", "<c-i>",
+	{ noremap = true, desc = "Next Jump" }
+)

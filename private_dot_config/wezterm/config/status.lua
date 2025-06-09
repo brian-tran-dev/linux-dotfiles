@@ -10,7 +10,6 @@ local keybinding = require("core.keybinding")
 
 
 local SOLID_LEFT <const> = utf8.char(0xe0b2)
-local ICON_CALENDAR <const> = icon.cod_calendar
 local ICON_BATTERY <const> = {
 	icon.fa_battery_0,
 	icon.fa_battery_1,
@@ -45,7 +44,7 @@ return {
 			local pane_id = gui_window:active_pane():pane_id()
 			local pane_mode = keybinding.mode_name_for_pane_id(pane_id)
 			local window_mode = keybinding.mode_name_for_window()
-			local general_info = " " .. strftime("%a %H:%M:%S") .. " "  .. battery_icon .. " " .. battery_level .. "% "
+			local general_info = " " .. strftime("%H:%M:%S") .. " "  .. battery_icon .. " " .. battery_level .. "% "
 
 			local bg_colors = { "#6b6b80", "#606073", "#555566" }
 			local fg_colors = { "#FFFFFF", "#FFFFFF", "#FFFFFF" }
