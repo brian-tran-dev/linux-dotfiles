@@ -20,9 +20,9 @@ opt.guicursor = "a:block,n-i-r-cr-i-ci:blinkwait500-blinkon500-blinkoff500,r-cr:
 
 vim.keymap.set("i", "jj", "<ESC>", { noremap = true, desc = "<Escape>" })
 vim.keymap.set("n", "<BS>", ":noh<Enter>", { noremap = true, desc = "Remove Highlighting" })
-vim.keymap.set("n", "<leader>oh", function ()
+vim.keymap.set("n", "<leader>gl", function ()
 	vim.cmd[[ edit vim.fn.expand('%:p:h') ]]
-end, { noremap = true, desc = "Open on cursor" })
+end, { noremap = true, desc = "Link/File" })
 vim.keymap.set("n", "<leader>bh", function ()
 	vim.cmd[[ bprevious ]]
 end, { noremap = true, desc = "Previous Buffer" })

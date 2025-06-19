@@ -1,99 +1,200 @@
 return {
 	{
-		'mrjones2014/legendary.nvim',
+		"mrjones2014/legendary.nvim",
 		priority = 900,
 		lazy = false,
-		dependencies = { 'kkharji/sqlite.lua' },
+		dependencies = { "kkharji/sqlite.lua" },
 		opts = {
 			extensions = {
-				lazy_nvim = true, },
+				lazy_nvim = true,
+			},
 		},
 		keys = {
 			{
 				"<leader>pl",
-				function () vim.cmd[[ Lazy ]] end,
+				function()
+					vim.cmd([[ Lazy ]])
+				end,
 				mode = "n",
 				noremap = true,
 				desc = "Lazy Panel",
 			},
 			{
 				"<C-p>",
-				function () vim.cmd[[ Legendary ]] end,
-				mode = {"n", "v"},
+				function()
+					vim.cmd([[ Legendary ]])
+				end,
+				mode = { "n", "v" },
 				noremap = true,
-			}
+			},
 		},
 	},
+
 	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = {
-			{ "nvim-tree/nvim-web-devicons" },
-			{ "nvim-lua/plenary.nvim" },
-		},
-		keys = {
-			{
-				"<leader>fg",
-				function() require("telescope.builtin").live_grep() end,
-				desc = "Find in",
-				mode = "n",
-				noremap = true,
-			},
-			{
-				"<leader>ff",
-				function() require("telescope.builtin").find_files() end,
-				mode = "n",
-				desc = "Open file",
-				noremap = true,
-			},
-			{
-				"<leader>fb",
-				function() require("telescope.builtin").buffers() end,
-				mode = "n",
-				desc = "Open Buffer",
-				noremap = true,
-			},
-			{
-				"<leader>gd",
-				function() require("telescope.builtin").lsp_definitions() end,
-				mode = "n",
-				desc = "Go to Definitions",
-				noremap = true,
-			},
-			{
-				"<leader>gr",
-				function() require("telescope.builtin").lsp_references() end,
-				mode = "n",
-				desc = "Go to References",
-				noremap = true,
-			},
-			{
-				"<leader>gt",
-				function() require("telescope.builtin").lsp_type_definitions() end,
-				mode = "n",
-				desc = "Go to Type References",
-				noremap = true,
-			}
-		},
-		config = function ()
-			local actions = require("telescope.actions")
-			require("telescope").setup({
-				defaults = {
-					mappings = {
-						n = {
-							["<C-c>"] = actions.close
-						}
+		"folke/snacks.nvim",
+		opts = {
+			picker = {
+				win = {
+					-- input window
+					input = {
+						keys = {
+							["<C-c>"] = { "close", mode = {"i", "n"} },
+						},
 					},
-					layout_strategy = "vertical",
-					layout_config = {
-						vertical = {
-							height = 0.95,
-							preview_cutoff = 0,
-							prompt_position = "bottom",
-							width = 0.8
+					list = {
+						keys = {
+							["<C-c>"] = "close",
 						},
 					},
 				},
-			})
-		end
+			},
+			explorer = {},
+		},
+
+		---@module "snacks"
+		keys = {
+
+			-- Find
+			{
+				"<leader>fg",
+				function()
+					Snacks.picker.grep()
+				end,
+				desc = "Find Grep",
+			},
+			{
+				"<leader>ff",
+				function()
+					Snacks.picker.explorer()
+				end,
+				desc = "Find Files",
+			},
+
+			-- List
+			{
+				"<leader>lb",
+				function()
+					Snacks.picker.buffers()
+				end,
+				desc = "Buffers",
+			},
+			{
+				"<leader>ld",
+				function()
+					Snacks.picker.diagnostics_buffer()
+				end,
+				desc = "Buffer Diagnostics",
+			},
+			{
+				"<leader>lD",
+				function()
+					Snacks.picker.diagnostics()
+				end,
+				desc = "All Diagnostics",
+			},
+			{
+				"<leader>lh",
+				function()
+					Snacks.picker.help()
+				end,
+				desc = "Help Pages",
+			},
+			{
+				"<leader>lj",
+				function()
+					Snacks.picker.jumps()
+				end,
+				desc = "Jumps",
+			},
+			{
+				"<leader>lk",
+				function()
+					Snacks.picker.keymaps()
+				end,
+				desc = "Keymaps",
+			},
+			{
+				"<leader>lm",
+				function()
+					Snacks.picker.marks()
+				end,
+				desc = "Marks",
+			},
+			{
+				"<leader>lp",
+				function()
+					Snacks.picker.lazy()
+				end,
+				desc = "Search for Plugin Spec",
+			},
+			{
+				"<leader>lq",
+				function()
+					Snacks.picker.qflist()
+				end,
+				desc = "Quickfix List",
+			},
+			{
+				"<leader>lC",
+				function()
+					Snacks.picker.colorschemes()
+				end,
+				desc = "Colorschemes",
+			},
+			{
+				"<leader>ls",
+				function()
+					Snacks.picker.lsp_symbols()
+				end,
+				desc = "LSP Symbols",
+			},
+			{
+				'<leader>l"',
+				function()
+					Snacks.picker.registers()
+				end,
+				desc = "Registers",
+			},
+
+			-- LSP
+			{
+				"<leader>gd",
+				function()
+					Snacks.picker.lsp_definitions()
+				end,
+				desc = "Definition",
+			},
+			{
+				"<leader>gD",
+				function()
+					Snacks.picker.lsp_declarations()
+				end,
+				desc = "Declaration",
+			},
+			{
+				"<leader>gr",
+				function()
+					Snacks.picker.lsp_references()
+				end,
+				nowait = true,
+				desc = "References",
+			},
+			{
+				"<leader>gi",
+				function()
+					Snacks.picker.lsp_implementations()
+				end,
+				desc = "Implementation",
+			},
+			{
+				"<leader>gt",
+				function()
+					Snacks.picker.lsp_type_definitions()
+				end,
+				desc = "Type Definition",
+			},
+
+		},
 	},
+
 }
