@@ -13,7 +13,7 @@ return {
 				},
 				float = {
 					padding = 0,
-					max_width = 30,
+					-- max_width = 30,
 					max_height = 10,
 					override = function(conf)
 						return vim.tbl_deep_extend("force", conf, {

@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local misc = require("core.misc")
+-- local misc = require("core.misc")
 local tab = require("config.tab")
 local theme = require("config.theme")
 local window = require("config.window")

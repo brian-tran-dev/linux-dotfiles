@@ -35,8 +35,9 @@ return {
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
 				},
+				signature = { enabled = false },
+				hover = { view = "lsp_hover" },
 			},
 			cmdline = {
 				view = "cmdline",
@@ -57,10 +58,43 @@ return {
 						style = "rounded"
 					},
 					win_options = {
-						winblend = 10
-					}
-				}
+						winblend = 10,
+					},
+				},
+				lsp_hover = {
+					view = "popup",
+					relative = "cursor",
+					zindex = 45,
+					enter = true,
+					anchor = "auto",
+					size = {
+						width = "auto",
+						height = "auto",
+						max_height = 10,
+						max_width = 120,
+					},
+					border = {
+						style = "rounded",
+						padding = { 0, 1 },
+					},
+					position = { row = 1, col = 0 },
+					win_options = {
+						wrap = true,
+						linebreak = true,
+					},
+				},
 			}
+		},
+	},
+
+	{
+		'stevearc/aerial.nvim',
+		opts = {},
+		-- Optional dependencies
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+			"onsails/lspkind.nvim",
 		},
 	},
 
@@ -69,14 +103,25 @@ return {
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 			"folke/noice.nvim",
+			'stevearc/aerial.nvim',
 		},
 		opts = {
 			theme = "dracular",
 			sections = {
-				lualine_a = { "mode" },
+				lualine_a = {{ "mode", fmt = function(str) return str:sub(1,1) end }},
 				lualine_b = { "branch", "diagnostics" },
-				lualine_c = { "filename" },
-				lualine_x = {
+				lualine_c = {
+					{
+						"filename",
+						file_status = true,
+						path = 1,
+						shorting_target = 40,
+					},
+					"aerial",
+				},
+
+				lualine_x = {},
+				lualine_y = {
 					{
 						require("noice").api.statusline.mode.get,
 						cond = require("noice").api.statusline.mode.has,
@@ -85,8 +130,7 @@ return {
 					"encoding",
 					"filetype",
 				},
-				lualine_y = { "progress" },
-				lualine_z = { "location" },
+				lualine_z = { "location", "selectioncount" },
 			},
 		},
 	},
@@ -103,4 +147,15 @@ return {
 			)
 		end
 	},
+
+	{
+		"petertriho/nvim-scrollbar",
+		opts = {
+			handle = {
+				blend = 0,
+				color = "#575159",
+			}
+		},
+	},
+
 }

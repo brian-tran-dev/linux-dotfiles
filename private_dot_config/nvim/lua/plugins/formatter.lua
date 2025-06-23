@@ -1,11 +1,8 @@
 return {
-	"stevearc/conform.nvim",
-	dependencies = {
-		"williamboman/mason.nvim",
-		"zapling/mason-conform.nvim",
-	},
-	config = function()
-		require("conform").setup({
+	{
+		"stevearc/conform.nvim",
+
+		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				javascript = { "prettier" },
@@ -19,25 +16,28 @@ return {
 				markdown = { "prettier" },
 			},
 			format_on_save = function() end,
-		})
-		require("mason-conform").setup()
-	end,
-	keys = {
-		{
-			"<leader>rf",
-			function()
-				require("conform").format()
-			end,
-			mode = "n",
-			desc = "Reformat all",
 		},
-		{
-			"<leader>rf",
-			function()
-				require("conform").format()
-			end,
-			mode = "v",
-			desc = "Reformat selection",
+
+		keys = {
+			{
+				"<leader>rf",
+				function()
+					require("conform").format()
+				end,
+				mode = { "n", "v" },
+				desc = "Reformat",
+			},
 		},
+
 	},
+
+
+	{
+		"zapling/mason-conform.nvim",
+		dependencies = {
+			"mason-org/mason.nvim",
+			"stevearc/conform.nvim",
+		},
+		opts = {},
+	}
 }

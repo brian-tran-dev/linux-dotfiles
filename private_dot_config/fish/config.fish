@@ -60,6 +60,8 @@ if status is-interactive
 	bind -M visual -m default \ei end-selection repaint-mode
 	bind -M insert \e\b kill-whole-line
 
+	set fzf_fd_opts --unrestricted
+
 	starship init fish | source
 	fzf --fish | source
 	zoxide init fish | source
