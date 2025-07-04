@@ -45,15 +45,30 @@ local function activate_control_mode()
 	end)
 end
 
+-- local function activate_confirm_mode()
+-- 	return act_cb(function(gui_window, mux_pane)
+-- 		gui_window:perform_action(act.ActivateKeyTable {
+-- 			name = "confirm_mode",
+-- 			one_shot = true,
+-- 			prevent_fallback = true,
+-- 			replace_current = false,
+-- 		}, mux_pane)
+-- 		keybinding.set_window_mode_name("CONFIRM")
+-- 	end)
+-- end
+
 local function set_tab_name(gui_window, mux_pane, input_str)
 	tab_mode.set_name(gui_window, input_str);
 	wezterm.log_info("test");
 	gui_window:perform_action(activate_control_mode(), mux_pane);
 end
 
+local function close_all(gui_window, mux_pane)
+	gui_window:perform_action(act.QuitApplication, mux_pane);
+end
+
 local function make_default_keybindings()
 	keybinding.default_bind("NONE", "F11", act.ToggleFullScreen)
-	keybinding.default_bind("CTRL", "q", act.QuitApplication)
 
 	keybinding.default_bind("CTRL", "s", activate_control_mode())
 
@@ -128,6 +143,7 @@ end
 
 local function create_control_key_config()
 	return {
+		{ mods = "CTRL", key = "q", action = act.QuitApplication },
 		{ mods = "NONE", key = "Escape", action = activate_default_mode() },
 		{ mods = "NONE", key = "q", action = activate_default_mode() },
 		{ mods = "CTRL", key = "s", action = activate_default_mode() },

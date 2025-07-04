@@ -130,7 +130,10 @@ return {
 					"encoding",
 					"filetype",
 				},
-				lualine_z = { "location", "selectioncount" },
+				lualine_z = {
+					{ "location", fmt = function(str) return vim.trim(str) end },
+					"selectioncount"
+				},
 			},
 		},
 	},

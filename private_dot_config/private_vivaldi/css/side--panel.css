@@ -2,6 +2,14 @@
 	border-right: 2px solid #6b6d80;
 }
 
+#browser #main.left .inner:has(#panels-container) {
+	--my-side-width: 41px;
+}
+
+#browser #main.left .inner:has(#panels-container.switcher) {
+	--my-side-width: 0px;
+}
+
 #browser #main.left #panels #switch .ToolbarButton-Button:hover {
 	color: #f6c177;
 	background-color: #4a4c59;
@@ -38,9 +46,29 @@
 }
 
 #browser #main.left #panels .panel-group {
-	left: 56px!important;
+	left: calc(var(--my-side-width) + 1px + 14px)!important;
 	top: 16px;
 	bottom: 16px;
 	border-radius: 8px;
 	border: 2px solid #6b6d80;
+	transition: none;
+}
+
+#browser #main.left #panels .panel-group:has(.panel) {
+	animation-name: my-panel-slide-in;
+	animation-duration: 100ms;
+	animation-timing-function: ease-out;
+	animation-iteration-count: 1;
+	animation-fill-mode: none;
+}
+
+@keyframes my-panel-slide-in {
+	0% {
+		z-index: -1;
+		transform: translateX(calc(-100% - 14px));
+	}
+	100% {
+		transform: translateX(0);
+		z-index: -1;
+	}
 }

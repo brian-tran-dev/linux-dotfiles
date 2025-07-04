@@ -5,13 +5,16 @@ return {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = { "prettier" },
-				jsx = { "prettier" },
-				typescript = { "prettier" },
+				javascript = { "biome", "prettier" },
+				javascriptreact = { "biome", "prettier" },
+				typescript = { "biome", "prettier" },
+				typescriptreact = { "biome", "prettier" },
+				jsx = { "biome", "prettier" },
 				html = { "prettier" },
-				css = { "prettier" },
+				css = { "biome", "prettier" },
 				scss = { "prettier" },
 				json = { "prettier" },
+				jsonc = { "biome", "prettier" },
 				yaml = { "prettier" },
 				markdown = { "prettier" },
 			},
@@ -22,7 +25,7 @@ return {
 			{
 				"<leader>rf",
 				function()
-					require("conform").format()
+					require("conform").format({ stop_after_first = true })
 				end,
 				mode = { "n", "v" },
 				desc = "Reformat",
