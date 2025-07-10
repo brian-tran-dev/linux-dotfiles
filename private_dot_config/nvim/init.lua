@@ -28,6 +28,11 @@ opt.guicursor = "a:block,n-i-r-cr-i-ci:blinkwait500-blinkon500-blinkoff500,r-cr:
 vim.keymap.set("i", "jj", "<ESC>", { noremap = true, desc = "<Escape>" })
 vim.keymap.set("n", "<BS>", ":noh<Enter>", { noremap = true, desc = "Remove Highlighting" })
 vim.keymap.set("c", "<Esc>", "<c-c>", { noremap = true, desc = "Cancel command line" })
+vim.keymap.set("n", "<leader>ww", "<Cmd>w<CR>", { noremap = true, desc = "Save" })
+vim.keymap.set("n", "<leader>wq", "<Cmd>wq<CR>", { noremap = true, desc = "Save & Close" })
+vim.keymap.set("n", "<leader>wa", "<Cmd>wqa<CR>", { noremap = true, desc = "Save & Close All" })
+vim.keymap.set("n", "<leader>qq", "<Cmd>q<CR>", { noremap = true, desc = "Close" })
+vim.keymap.set("n", "<leader>qa", "<Cmd>qa<CR>", { noremap = true, desc = "Close all" })
 
 vim.keymap.set("n", "<leader>gl", function()
 	vim.cmd([[ edit vim.fn.expand('%:p:h') ]])

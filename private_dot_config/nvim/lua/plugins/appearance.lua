@@ -154,11 +154,27 @@ return {
 	{
 		"petertriho/nvim-scrollbar",
 		opts = {
+			hide_if_all_visible = true,
+			throttle_ms = 10,
+
 			handle = {
 				blend = 0,
 				color = "#575159",
-			}
+			},
+			handlers = {
+				cursor = false
+			},
 		},
 	},
 
+	{
+		"karb94/neoscroll.nvim",
+		opts = { mappings = {} },
+		config = function (_, opts)
+			local neoscroll = require("neoscroll")
+			neoscroll.setup(opts)
+			vim.keymap.set({ "n", "i" }, "<C-j>", function() neoscroll.scroll(10, { duration = 100 }) end, { desc = "scroll down" })
+			vim.keymap.set({ "n", "i" }, "<C-k>", function() neoscroll.scroll(-10, { duration = 100 }) end, { desc = "scroll up" })
+		end
+	},
 }

@@ -24,24 +24,12 @@ end
 local function activate_tab_input_mode()
 	return act_cb(function(gui_window, mux_pane)
 		gui_window:perform_action(act.ActivateKeyTable {
-			name = "blank",
+			name = "tab_input",
 			one_shot = false,
 			prevent_fallback = false,
 			replace_current = true,
 		}, mux_pane)
 		keybinding.set_window_mode_name("TAB RENAME")
-	end)
-end
-
-local function activate_quit_app_mode()
-	return act_cb(function(gui_window, mux_pane)
-		gui_window:perform_action(act.ActivateKeyTable {
-			name = "blank",
-			one_shot = false,
-			prevent_fallback = false,
-			replace_current = true,
-		}, mux_pane)
-		keybinding.set_window_mode_name("QUIT")
 	end)
 end
 
@@ -66,21 +54,6 @@ local function set_tab_name (exit_to_default)
 		else
 			gui_window:perform_action(activate_control_mode(), mux_pane);
 		end
-	end)
-end
-
-local function quit_application()
-	return act_cb(function (gui_window, mux_pane)
-		gui_window:perform_action(act.Multiple{
-			activate_quit_app_mode(),
-			act.Confirmation {
-				message = "🔴 Really Quit WezTerm?",
-				action = act_cb(function ()
-					gui_window:perform_action(act.QuitApplication, mux_pane)
-				end),
-				cancel = activate_default_mode(),
-			},
-		}, mux_pane)
 	end)
 end
 
@@ -160,7 +133,10 @@ end
 
 local function create_control_key_config()
 	return {
-		{ mods = "CTRL", key = "q", action = quit_application() },
+		{ mods = "CTRL", key = "q", action = act.Multiple {
+			act.QuitApplication,
+			activate_default_mode(),
+		}},
 
 		{ mods = "NONE", key = "Escape", action = activate_default_mode() },
 		{ mods = "NONE", key = "q", action = activate_default_mode() },
@@ -321,6 +297,7 @@ end
 local function create_key_config()
 	return {
 		{ mods = "CTRL|SHIFT",  key = "v", action = act.PasteFrom("Clipboard") },
+		{ mods = "CTRL", key = "d", action = act.SendKey { mods = "CTRL", key = "c" } },
 	}
 end
 
@@ -337,7 +314,7 @@ return {
 		config.key_tables = {
 			default_mode = keybinding.generate_key_config(),
 			control_mode = create_control_key_config(),
-			blank = {}, copy_mode = {}, search_mode = {},
+			tab_input = {}, copy_mode = {}, search_mode = {},
 		}
 
 		local need_init = true;
