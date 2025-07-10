@@ -5,16 +5,17 @@ return {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = { "biome", "prettier" },
-				javascriptreact = { "biome", "prettier" },
-				typescript = { "biome", "prettier" },
-				typescriptreact = { "biome", "prettier" },
-				jsx = { "biome", "prettier" },
+				javascript = { "biome-format" },
+				javascriptreact = { "biome-format", "prettier" },
+				typescript = { "biome-format", "prettier" },
+				typescriptreact = { "biome-format", "prettier" },
+				tsx = { "biome-format", "prettier" },
+				jsx = { "biome-format", "prettier" },
 				html = { "prettier" },
-				css = { "biome", "prettier" },
+				css = { "biome-format", "prettier" },
 				scss = { "prettier" },
 				json = { "prettier" },
-				jsonc = { "biome", "prettier" },
+				jsonc = { "biome-format", "prettier" },
 				yaml = { "prettier" },
 				markdown = { "prettier" },
 			},
@@ -32,6 +33,30 @@ return {
 			},
 		},
 
+		config = function (_, opts)
+			local conform = require('conform')
+			local util = require('conform.util')
+
+			conform.setup(opts)
+
+			conform.formatters["biome-format"] = {
+				command = util.from_node_modules("biome"),
+				stdin = true,
+				args = {
+					"check",
+					"--write",
+					"--formatter-enabled=true",
+					"--linter-enabled=false",
+					"--assist-enabled=true",
+					"--stdin-file-path",
+					"$FILENAME",
+				},
+				cwd = util.root_file({
+					"biome.json",
+					"biome.jsonc",
+				}),
+			}
+		end
 	},
 
 

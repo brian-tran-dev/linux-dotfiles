@@ -24,12 +24,24 @@ end
 local function activate_tab_input_mode()
 	return act_cb(function(gui_window, mux_pane)
 		gui_window:perform_action(act.ActivateKeyTable {
-			name = "tab_input",
+			name = "blank",
 			one_shot = false,
 			prevent_fallback = false,
 			replace_current = true,
 		}, mux_pane)
 		keybinding.set_window_mode_name("TAB RENAME")
+	end)
+end
+
+local function activate_quit_app_mode()
+	return act_cb(function(gui_window, mux_pane)
+		gui_window:perform_action(act.ActivateKeyTable {
+			name = "blank",
+			one_shot = false,
+			prevent_fallback = false,
+			replace_current = true,
+		}, mux_pane)
+		keybinding.set_window_mode_name("QUIT")
 	end)
 end
 
@@ -45,26 +57,31 @@ local function activate_control_mode()
 	end)
 end
 
--- local function activate_confirm_mode()
--- 	return act_cb(function(gui_window, mux_pane)
--- 		gui_window:perform_action(act.ActivateKeyTable {
--- 			name = "confirm_mode",
--- 			one_shot = true,
--- 			prevent_fallback = true,
--- 			replace_current = false,
--- 		}, mux_pane)
--- 		keybinding.set_window_mode_name("CONFIRM")
--- 	end)
--- end
-
-local function set_tab_name(gui_window, mux_pane, input_str)
-	tab_mode.set_name(gui_window, input_str);
-	wezterm.log_info("test");
-	gui_window:perform_action(activate_control_mode(), mux_pane);
+local function set_tab_name (exit_to_default)
+	return act_cb(function(gui_window, mux_pane, input_str)
+		tab_mode.set_name(gui_window, input_str);
+		wezterm.log_info("test");
+		if exit_to_default then
+			gui_window:perform_action(activate_default_mode(), mux_pane);
+		else
+			gui_window:perform_action(activate_control_mode(), mux_pane);
+		end
+	end)
 end
 
-local function close_all(gui_window, mux_pane)
-	gui_window:perform_action(act.QuitApplication, mux_pane);
+local function quit_application()
+	return act_cb(function (gui_window, mux_pane)
+		gui_window:perform_action(act.Multiple{
+			activate_quit_app_mode(),
+			act.Confirmation {
+				message = "🔴 Really Quit WezTerm?",
+				action = act_cb(function ()
+					gui_window:perform_action(act.QuitApplication, mux_pane)
+				end),
+				cancel = activate_default_mode(),
+			},
+		}, mux_pane)
+	end)
 end
 
 local function make_default_keybindings()
@@ -143,53 +160,161 @@ end
 
 local function create_control_key_config()
 	return {
-		{ mods = "CTRL", key = "q", action = act.QuitApplication },
+		{ mods = "CTRL", key = "q", action = quit_application() },
+
 		{ mods = "NONE", key = "Escape", action = activate_default_mode() },
 		{ mods = "NONE", key = "q", action = activate_default_mode() },
 		{ mods = "CTRL", key = "s", action = activate_default_mode() },
 
-		{ mods = "CTRL", key = "d", action = act.CloseCurrentPane({ confirm = true }) },
+		{ mods = "CTRL", key = "d", action = act.Multiple {
+			act.CloseCurrentPane({ confirm = true }),
+			activate_default_mode(),
+		}},
 
-		{ mods = "CTRL|SHIFT", key = "j", action = act.SplitPane({ direction = "Down", size = { Percent = 50 } }) },
-		{ mods = "CTRL|SHIFT", key = "k", action = act.SplitPane({ direction = "Up", size = { Percent = 50 } }) },
-		{ mods = "CTRL|SHIFT", key = "h", action = act.SplitPane({ direction = "Left", size = { Percent = 50 } }) },
-		{ mods = "CTRL|SHIFT", key = "l", action = act.SplitPane({ direction = "Right", size = { Percent = 50 } }) },
+		{ mods = "LEADER", key = "j", action = act.SplitPane({ direction = "Down", size = { Percent = 50 } }) },
+		{ mods = "CTRL|SHIFT", key = "j", action = act.Multiple {
+			act.SplitPane({ direction = "Down", size = { Percent = 50 } }),
+			activate_default_mode(),
+		}},
+		{ mods = "LEADER", key = "k", action = act.SplitPane({ direction = "Up", size = { Percent = 50 } }) },
+		{ mods = "CTRL|SHIFT", key = "k", action = act.Multiple {
+			act.SplitPane({ direction = "Up", size = { Percent = 50 } }),
+			activate_default_mode(),
+		}},
+		{ mods = "LEADER", key = "h", action = act.SplitPane({ direction = "Left", size = { Percent = 50 } }) },
+		{ mods = "CTRL|SHIFT", key = "h", action = act.Multiple {
+			act.SplitPane({ direction = "Left", size = { Percent = 50 } }),
+			activate_default_mode(),
+		}},
+		{ mods = "LEADER", key = "l", action = act.SplitPane({ direction = "Right", size = { Percent = 50 } }) },
+		{ mods = "CTRL|SHIFT", key = "l", action = act.Multiple {
+			act.SplitPane({ direction = "Right", size = { Percent = 50 } }),
+			activate_default_mode(),
+		}},
 
 		{ mods = "SHIFT", key = "j", action = act.AdjustPaneSize({ "Down", 2 }) },
 		{ mods = "SHIFT", key = "k", action = act.AdjustPaneSize({ "Up", 2 }) },
 		{ mods = "SHIFT", key = "h", action = act.AdjustPaneSize({ "Left", 5 }) },
 		{ mods = "SHIFT", key = "l", action = act.AdjustPaneSize({ "Right", 5 }) },
 
-		{ mods = "CTRL", key = "j", action = act.ActivatePaneDirection("Down") },
-		{ mods = "CTRL", key = "k", action = act.ActivatePaneDirection("Up") },
-		{ mods = "CTRL", key = "h", action = act.ActivatePaneDirection("Left") },
-		{ mods = "CTRL", key = "l", action = act.ActivatePaneDirection("Right") },
+		{ mods = "", key = "j", action = act.ActivatePaneDirection("Down") },
+		{ mods = "CTRL", key = "j", action = act.Multiple{
+			act.ActivatePaneDirection("Down"),
+			activate_default_mode(),
+		}},
+		{ mods = "", key = "k", action = act.ActivatePaneDirection("Up") },
+		{ mods = "CTRL", key = "k", action = act.Multiple{
+			act.ActivatePaneDirection("Up"),
+			activate_default_mode(),
+		}},
+		{ mods = "", key = "h", action = act.ActivatePaneDirection("Left") },
+		{ mods = "CTRL", key = "h", action = act.Multiple{
+			act.ActivatePaneDirection("Left"),
+			activate_default_mode(),
+		}},
+		{ mods = "", key = "l", action = act.ActivatePaneDirection("Right") },
+		{ mods = "CTRL", key = "l", action = act.Multiple{
+			act.ActivatePaneDirection("Right"),
+			activate_default_mode(),
+		}},
 
-		{ mods = "CTRL", key = "w", action = act.CloseCurrentTab({ confirm = true }) },
-		{ mods = "CTRL", key = "i", action = act.ActivateTabRelative(-1) },
-		{ mods = "CTRL", key = "o", action = act.ActivateTabRelative(1) },
+		{ mods = "", key = "w", action = act.CloseCurrentTab({ confirm = true }) },
+		{ mods = "CTRL", key = "w", action = act.Multiple {
+			act.CloseCurrentTab({ confirm = true }),
+			activate_default_mode(),
+		}},
+		{ mods = "", key = "i", action = act.ActivateTabRelative(-1) },
+		{ mods = "CTRL", key = "i", action = act.Multiple {
+			act.ActivateTabRelative(-1),
+			activate_default_mode(),
+		}},
+		{ mods = "", key = "o", action = act.ActivateTabRelative(1) },
+		{ mods = "CTRL", key = "o", action = act.Multiple {
+			act.ActivateTabRelative(1),
+			activate_default_mode(),
+		}},
 		{ mods = "CTRL|ALT", key = "i", action = act.MoveTabRelative(-1) },
 		{ mods = "CTRL|ALT", key = "o", action = act.MoveTabRelative(1) },
 		-- { mods = "CTRL", key = "/", action = act.ShowTabNavigator },
-		{ mods = "CTRL", key = "n", action = act_cb(tab_mode.new) },
+		{ mods = "", key = "n", action = act_cb(tab_mode.new) },
+		{ mods = "CTRL", key = "n", action = act.Multiple {
+			act_cb(tab_mode.new),
+			activate_default_mode(),
+			act_cb(function(gui_window)
+				wezterm.time.call_after(0.01, function()
+					gui_window:perform_action(act.Multiple {
+						act.PromptInputLine {
+							description = "current tab name?",
+							action = set_tab_name(true),
+						},
+						activate_tab_input_mode(),
+					}, gui_window:active_pane())
+				end)
+			end)
+		}},
 		{
 			mods = "CTRL", key = "u", action = act.Multiple {
 				act.PromptInputLine {
 					description = "current tab name?",
-					action = act_cb(set_tab_name),
+					action = set_tab_name(true),
 				},
 				activate_tab_input_mode(),
 			},
 		},
-		{ mods = "CTRL", key = "1", action = act.ActivateTab(0) },
-		{ mods = "CTRL", key = "2", action = act.ActivateTab(1) },
-		{ mods = "CTRL", key = "3", action = act.ActivateTab(2) },
-		{ mods = "CTRL", key = "4", action = act.ActivateTab(3) },
-		{ mods = "CTRL", key = "5", action = act.ActivateTab(4) },
-		{ mods = "CTRL", key = "6", action = act.ActivateTab(5) },
-		{ mods = "CTRL", key = "7", action = act.ActivateTab(6) },
-		{ mods = "CTRL", key = "8", action = act.ActivateTab(7) },
-		{ mods = "CTRL", key = "9", action = act.ActivateTab(8) },
+		{
+			mods = "", key = "u", action = act.Multiple {
+				act.PromptInputLine {
+					description = "current tab name?",
+					action = set_tab_name(false),
+				},
+				activate_tab_input_mode(),
+			},
+		},
+		{ mods = "", key = "1", action = act.ActivateTab(0) },
+		{ mods = "CTRL", key = "1", action = act.Multiple {
+			act.ActivateTab(0),
+			activate_default_mode(),
+		}},
+		{ mods = "", key = "2", action = act.ActivateTab(1) },
+		{ mods = "CTRL", key = "2", action = act.Multiple {
+			act.ActivateTab(1),
+			activate_default_mode(),
+		}},
+		{ mods = "", key = "3", action = act.ActivateTab(2) },
+		{ mods = "CTRL", key = "3", action = act.Multiple {
+			act.ActivateTab(2),
+			activate_default_mode(),
+		}},
+		{ mods = "", key = "4", action = act.ActivateTab(3) },
+		{ mods = "CTRL", key = "4", action = act.Multiple {
+			act.ActivateTab(3),
+			activate_default_mode(),
+		}},
+		{ mods = "", key = "5", action = act.ActivateTab(4) },
+		{ mods = "CTRL", key = "5", action = act.Multiple {
+			act.ActivateTab(4),
+			activate_default_mode(),
+		}},
+		{ mods = "", key = "6", action = act.ActivateTab(5) },
+		{ mods = "CTRL", key = "6", action = act.Multiple {
+			act.ActivateTab(5),
+			activate_default_mode(),
+		}},
+		{ mods = "", key = "7", action = act.ActivateTab(6) },
+		{ mods = "CTRL", key = "7", action = act.Multiple {
+			act.ActivateTab(6),
+			activate_default_mode(),
+		}},
+		{ mods = "", key = "8", action = act.ActivateTab(7) },
+		{ mods = "CTRL", key = "8", action = act.Multiple {
+			act.ActivateTab(7),
+			activate_default_mode(),
+		}},
+		{ mods = "", key = "9", action = act.ActivateTab(8) },
+		{ mods = "CTRL", key = "9", action = act.Multiple {
+			act.ActivateTab(8),
+			activate_default_mode(),
+		}},
 	}
 end
 
@@ -213,7 +338,7 @@ return {
 		config.key_tables = {
 			default_mode = keybinding.generate_key_config(),
 			control_mode = create_control_key_config(),
-			tab_input = {}, copy_mode = {}, search_mode = {},
+			blank = {}, copy_mode = {}, search_mode = {},
 		}
 
 		local need_init = true;

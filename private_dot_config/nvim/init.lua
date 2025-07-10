@@ -33,53 +33,30 @@ vim.keymap.set("n", "<leader>gl", function()
 	vim.cmd([[ edit vim.fn.expand('%:p:h') ]])
 end, { noremap = true, desc = "Goto  Link/File" })
 
-vim.keymap.set({ "n", "i" }, "<c-g>", function()
-	local float_win = nil
-	local wins = api.nvim_tabpage_list_wins(api.nvim_get_current_tabpage())
-
-	for _, win in ipairs(wins) do
-		local c = vim.api.nvim_win_get_config(win)
-		if c.relative ~= "" and c.zindex > 0 and c.focusable then
-			float_win = win
-			vim.print({ "float win", win, c })
-			break
+local bufs_with_exit_shortcuts = {}
+api.nvim_create_autocmd("BufEnter", {
+	pattern = "*",
+	callback = function(args)
+		local buf = args.buf
+		if not vim.bo[buf].modifiable and bufs_with_exit_shortcuts[buf] == nil then
+			bufs_with_exit_shortcuts[buf] = true
+			vim.keymap.set({ "n", "v" }, "q", function()
+				api.nvim_buf_delete(buf, { force = true })
+			end, { buffer = buf, noremap = true, desc = "Exit" })
+			vim.keymap.set({ "n", "v", "c", "i" }, "<C-c>", function()
+				api.nvim_buf_delete(buf, { force = true })
+			end, { buffer = buf, noremap = true, desc = "Exit" })
 		end
 	end
-
-	if float_win == nil then
-		return
-	end
-
-	local height = api.nvim_win_get_height(float_win)
-	local width = api.nvim_win_get_width(float_win)
-
-	local close_win = function()
-		api.nvim_win_close(float_win, true)
-	end
-
-	local move = function(d_row, d_col)
-		return function()
-			local pos = api.nvim_win_get_cursor(float_win)
-			local row = pos[1] + d_row
-			local col = pos[2] + d_col
-			if row < 1 or col < 0 or row > height or col >= width then
-				return
-			end
-			api.nvim_win_set_cursor(float_win, { pos[1] + d_row, pos[2] + d_col })
+})
+api.nvim_create_autocmd({ "BufDelete", "BufUnload", "BufHidden" }, {
+	pattern = "*",
+	callback = function (args)
+		if bufs_with_exit_shortcuts[args.buf] then
+			bufs_with_exit_shortcuts[args.buf] = nil
 		end
 	end
-
-	local buf = api.nvim_win_get_buf(float_win)
-	vim.keymap.set("i", "h", move(0, -1), { noremap = true, buffer = buf })
-	vim.keymap.set("i", "j", move(1, 0), { noremap = true, buffer = buf })
-	vim.keymap.set("i", "k", move(-1, 0), { noremap = true, buffer = buf })
-	vim.keymap.set("i", "l", move(0, 1), { noremap = true, buffer = buf })
-	vim.keymap.set({ "n", "i", "v" }, "q", close_win, { noremap = true, buffer = buf })
-	vim.keymap.set({ "n", "i", "v" }, "<c-c>", close_win, { noremap = true, buffer = buf })
-	vim.keymap.set("n", "<Esc>", close_win, { noremap = true, buffer = buf })
-
-	api.nvim_set_current_win(float_win)
-end, { noremap = true, desc = "Focus float window" })
+})
 --------------------------------------------------
 
 --------- Switch Buffer ------------------------------

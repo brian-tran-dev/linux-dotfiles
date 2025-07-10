@@ -35,6 +35,8 @@ config.cursor_blink_rate = 500
 config.cursor_blink_ease_in = "Constant"
 config.cursor_blink_ease_out = "Constant"
 config.default_cursor_style = "BlinkingBlock"
+config.window_close_confirmation = "NeverPrompt"
+config.skip_close_confirmation_for_processes_named = {}
 
 tab.config(config)
 theme.config(config)

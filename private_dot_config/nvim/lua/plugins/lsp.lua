@@ -4,7 +4,7 @@ return {
 		"mason-org/mason-lspconfig.nvim",
 		dependencies = {
 			"neovim/nvim-lspconfig",
-			"mason-org/mason.nvim"
+			"mason-org/mason.nvim",
 		},
 		opts = {
 			ensure_installed = {
@@ -24,23 +24,23 @@ return {
 			border = "rounded",
 		},
 		config = function(_, opts)
-			local hover = require('pretty_hover')
+			local hover = require("pretty_hover")
 			hover.setup(opts)
 			vim.keymap.set("n", "<leader>sd", hover.hover, { desc = "Show docs" })
-		end
+		end,
 	},
 
 	{
-		'brian-tran-dev/blink.cmp',
+		"brian-tran-dev/blink.cmp",
 		-- optional: provides snippets for the snippet source
 		dependencies = {
-			'rafamadriz/friendly-snippets',
+			"rafamadriz/friendly-snippets",
 		},
 
 		-- use a release tag to download pre-built binaries
 		-- version = '1.*',
 		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-		build = 'rustup run nightly cargo build --release',
+		build = "rustup run nightly cargo build --release",
 		-- If you use nix, you can build from source using latest nightly rust with:
 		-- build = 'nix run .#build-plugin',
 
@@ -48,25 +48,31 @@ return {
 		---@type blink.cmp.Config
 		opts = {
 			keymap = {
-				preset = 'none',
-				['<C-n>'] = { 'show', 'select_next', 'fallback' },
-				['<C-A-n>'] = { 'select_prev', 'fallback' },
-				['<C-k>'] = {
-					'scroll_signature_up', 'scroll_documentation_up', 'select_prev', 'fallback'
+				preset = "none",
+				["<C-n>"] = { "show", "select_next", "fallback" },
+				["<C-A-n>"] = { "select_prev", "fallback" },
+				["<C-k>"] = {
+					"scroll_documentation_up",
+					"select_prev",
+					"scroll_signature_up",
+					"fallback",
 				},
-				['<C-j>'] = {
-					'scroll_signature_down', 'scroll_documentation_down', 'select_next', 'fallback'
+				["<C-j>"] = {
+					"scroll_documentation_down",
+					"select_next",
+					"scroll_signature_down",
+					"fallback",
 				},
-				['<C-l>'] = { 'show_documentation', 'fallback' },
-				['<C-h>'] = { 'hide_documentation', 'fallback' },
-				['<Esc>'] = { 'hide_documentation', 'hide_signature', 'hide', 'fallback' },
-				['<C-c>'] = { 'hide_signature', 'cancel', 'fallback' },
-				['<Tab>'] = { 'select_and_accept', 'fallback' },
-				['<Cr>'] = { 'accept', 'fallback' },
+				["<C-l>"] = { "show_documentation", "fallback" },
+				["<C-h>"] = { "hide_documentation", "fallback" },
+				["<Esc>"] = { "hide_documentation", "hide", "hide_signature", "fallback" },
+				["<C-c>"] = { "cancel", "hide_signature", "fallback" },
+				["<Tab>"] = { "select_and_accept", "fallback" },
+				["<Cr>"] = { "accept", "fallback" },
 			},
 
 			appearance = {
-				nerd_font_variant = 'mono',
+				nerd_font_variant = "mono",
 			},
 
 			completion = {
@@ -74,16 +80,8 @@ return {
 					auto_show = false,
 					window = {
 						max_height = 10,
-						border = 'rounded'
+						border = "rounded",
 					},
-					-- draw = function(opts)
-					-- 	if opts.item and opts.item.documentation then
-					-- 		local out = require("pretty_hover.parser").parse(opts.item.documentation.value)
-					-- 		opts.item.documentation.value = out:string()
-					-- 	end
-					--
-					-- 	opts.default_implementation()
-					-- end,
 				},
 				trigger = {
 					-- When true, will prefetch the completion items when entering insert mode
@@ -107,7 +105,7 @@ return {
 					-- LSPs can indicate when to show the completion window via trigger characters
 					-- however, some LSPs (i.e. tsserver) return characters that would essentially
 					-- always show the window. We block these by default.
-					show_on_blocked_trigger_characters = { ' ', '\n', '\t' },
+					show_on_blocked_trigger_characters = { " ", "\n", "\t" },
 					-- When both this and show_on_trigger_character are true, will show the completion window
 					-- when the cursor comes after a trigger character after accepting an item
 					show_on_accept_on_trigger_character = false,
@@ -118,15 +116,15 @@ return {
 					-- List of trigger characters (on top of `show_on_blocked_trigger_characters`) that won't trigger
 					-- the completion window when the cursor comes after a trigger character when
 					-- entering insert mode/accepting an item
-					show_on_x_blocked_trigger_characters = { "'", '"', '(' },
+					show_on_x_blocked_trigger_characters = { "'", '"', "(" },
 				},
 				list = {
 					selection = { preselect = false, auto_insert = false },
 				},
 				ghost_text = {
 					enabled = true,
-					show_with_menu = true
-				}
+					show_with_menu = true,
+				},
 			},
 
 			signature = {
@@ -139,7 +137,7 @@ return {
 				},
 				window = {
 					max_height = 10,
-					border = 'rounded',
+					border = "rounded",
 					show_documentation = true,
 					scrollbar = true,
 					treesitter_highlighting = true,
@@ -149,7 +147,7 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { 'lsp', 'path', 'snippets', 'buffer' },
+				default = { "lsp", "path", "snippets", "buffer" },
 			},
 
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
@@ -159,18 +157,17 @@ return {
 			-- See the fuzzy documentation for more information
 			fuzzy = { implementation = "prefer_rust_with_warning" },
 
-
 			cmdline = {
 				keymap = {
-					preset = 'inherit',
-					['<C-c>'] = {
+					preset = "inherit",
+					["<C-c>"] = {
 						function(cmp)
 							cmp.cancel()
 							return false
 						end,
-						'fallback',
+						"fallback",
 					},
-					['<Cr>'] = { 'accept_and_enter', 'fallback' },
+					["<Cr>"] = { "accept_and_enter", "fallback" },
 				},
 				completion = {
 					menu = { auto_show = true },
@@ -178,16 +175,16 @@ return {
 						selection = { preselect = false, auto_insert = false },
 					},
 				},
-				sources = { "buffer", "cmdline", "path" }
+				sources = { "buffer", "cmdline", "path" },
 			},
 		},
 
 		opts_extend = { "sources.default" },
 		config = function(_, opts)
-			local cmp = require('blink-cmp')
+			local cmp = require("blink-cmp")
 			cmp.setup(opts)
-			vim.api.nvim_set_hl(0, "BlinkCmpGhostText", { fg = '#848089'})
-		end
+			vim.api.nvim_set_hl(0, "BlinkCmpGhostText", { fg = "#848089" })
+		end,
 	},
 
 	{
@@ -212,7 +209,36 @@ return {
 			},
 		},
 		keys = {
-			{ "<leader>rn", function() require('live-rename').rename() end, mode = "n", desc = "Rename"},
+			{
+				"<leader>rn",
+				function()
+					require("live-rename").rename()
+				end,
+				mode = "n",
+				desc = "Rename",
+			},
 		},
+	},
+
+	{
+		"rachartier/tiny-code-action.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"folke/snacks.nvim",
+		},
+		event = "LspAttach",
+		opts = {
+			picker = "snacks",
+		},
+		keys = {
+			{
+				"<leader>la",
+				function()
+					require("tiny-code-action").code_action()
+				end,
+				mode = { "n", "x" },
+				desc = "List code actions",
+			}
+		}
 	},
 }
