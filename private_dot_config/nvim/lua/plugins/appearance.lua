@@ -173,8 +173,8 @@ return {
 		config = function (_, opts)
 			local neoscroll = require("neoscroll")
 			neoscroll.setup(opts)
-			vim.keymap.set({ "n", "i" }, "<C-j>", function() neoscroll.scroll(10, { duration = 100 }) end, { desc = "scroll down" })
-			vim.keymap.set({ "n", "i" }, "<C-k>", function() neoscroll.scroll(-10, { duration = 100 }) end, { desc = "scroll up" })
+			vim.keymap.set({ "n", "i" }, "<C-j>", function() neoscroll.scroll(1, { duration = 1 }) end, { desc = "scroll down" })
+			vim.keymap.set({ "n", "i" }, "<C-k>", function() neoscroll.scroll(-1, { duration = 1 }) end, { desc = "scroll up" })
 		end
 	},
 }

@@ -21,7 +21,7 @@ return {
 		"brian-tran-dev/nvim-pretty_hover",
 		opts = {
 			max_height = 10,
-			border = "rounded",
+			border = 'rounded',
 		},
 		config = function(_, opts)
 			local hover = require("pretty_hover")
@@ -93,13 +93,13 @@ return {
 					-- When true, will show completion window after backspacing into a keyword
 					show_on_backspace_in_keyword = true,
 					-- When true, will show the completion window after accepting a completion and then backspacing into a keyword
-					show_on_backspace_after_accept = false,
+					show_on_backspace_after_accept = true,
 					-- When true, will show the completion window after entering insert mode and backspacing into keyword
-					show_on_backspace_after_insert_enter = false,
+					show_on_backspace_after_insert_enter = true,
 					-- When true, will show the completion window after typing any of alphanumerics, `-` or `_`
 					show_on_keyword = true,
 					-- When true, will show the completion window after typing a trigger character
-					show_on_trigger_character = false,
+					show_on_trigger_character = true,
 					-- When true, will show the completion window after entering insert mode
 					show_on_insert = false,
 					-- LSPs can indicate when to show the completion window via trigger characters
@@ -108,10 +108,10 @@ return {
 					show_on_blocked_trigger_characters = { " ", "\n", "\t" },
 					-- When both this and show_on_trigger_character are true, will show the completion window
 					-- when the cursor comes after a trigger character after accepting an item
-					show_on_accept_on_trigger_character = false,
+					show_on_accept_on_trigger_character = true,
 					-- When both this and show_on_trigger_character are true, will show the completion window
 					-- when the cursor comes after a trigger character when entering insert mode
-					show_on_insert_on_trigger_character = false,
+					show_on_insert_on_trigger_character = true,
 
 					-- List of trigger characters (on top of `show_on_blocked_trigger_characters`) that won't trigger
 					-- the completion window when the cursor comes after a trigger character when
@@ -155,7 +155,14 @@ return {
 			-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
 			--
 			-- See the fuzzy documentation for more information
-			fuzzy = { implementation = "prefer_rust_with_warning" },
+			fuzzy = {
+				implementation = "prefer_rust_with_warning",
+				sorts = {
+					"exact",
+					"score",
+					"sort_text",
+				}
+			},
 
 			cmdline = {
 				keymap = {

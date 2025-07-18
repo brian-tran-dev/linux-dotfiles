@@ -1,55 +1,78 @@
 return {
 	{
 		"stevearc/oil.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
-		config = function()
-			local oil = require("oil")
-			vim.keymap.set("n", "<leader>e", oil.open_float, {
-				desc = "Open File Explorer",
-			})
-			oil.setup({
-				view_options = {
-					show_hidden = true,
-				},
-				float = {
-					padding = 0,
-					-- max_width = 30,
-					max_height = 10,
-					override = function(conf)
-						return vim.tbl_deep_extend("force", conf, {
-							relative = 'editor',
-							anchor = "SW",
-							row = 0,
-							col = 0,
-							border = "rounded",
-						})
-					end,
-				},
-				preview_win = {
-					disable_preview = function(_)
-						return true
-					end,
-				},
-				keymaps = {
-					["<leader>o?"] = { "actions.show_help", mode = "n" },
-					["<CR>"] = "actions.select",
-					["<leader>ov"] = { "actions.select", opts = { vertical = true } },
-					["<leader>oh"] = { "actions.select", opts = { horizontal = true } },
-					-- ["<C-t>"] = { "actions.select", opts = { tab = true } },
-					-- ["<leader>p"] = "actions.preview",
-					["<C-c>"] = { "actions.close", mode = "n" },
-					["<ESC>"] = { "actions.close", mode = "n" },
-					["<leader>or"] = "actions.refresh",
-					["<leader>op"] = { "actions.parent", mode = "n" },
-					-- ["<leader>o_"] = { "actions.open_cwd", mode = "n" },
-					-- ["<leader>o`"] = { "actions.cd", mode = "n" },
-					-- ["<leader>o~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
-					["<leader>os"] = { "actions.change_sort", mode = "n" },
-					-- ["<leader>e"] = "actions.open_external",
-					["<leader>o."] = { "actions.toggle_hidden", mode = "n" },
-					["<leader>o\\"] = { "actions.toggle_trash", mode = "n" },
-				},
-			})
-		end,
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			{ "echasnovski/mini.icons", opts = {} },
+		},
+		opts = {
+			columns = { "size", "icon" },
+			view_options = {
+				show_hidden = true,
+				is_always_hidden = function(name)
+					return name == '..'
+				end
+			},
+			float = {
+				padding = 2,
+				border = "rounded",
+				-- max_width = 30,
+				max_height = 10,
+				preview_split = "right",
+				override = function(conf)
+					return vim.tbl_deep_extend("force", conf, {
+						relative = "editor",
+						anchor = "SW",
+						row = 0,
+						col = 0,
+					})
+				end,
+			},
+			preview_win = {
+				update_on_cursor_moved = true,
+				-- How to open the preview window "load"|"scratch"|"fast_scratch"
+				preview_method = "fast_scratch",
+				-- A function that returns true to disable preview on a file e.g. to avoid lag
+				disable_preview = function()
+					return false
+				end,
+			},
+			use_default_keymaps = false,
+			keymaps = {
+				["g?"] = { "actions.show_help", mode = "n" },
+				["<C-l>"] = "actions.select",
+				["<leader>gv"] = { "actions.select", opts = { vertical = true } },
+				["<leader>gh"] = { "actions.select", opts = { horizontal = true } },
+				["<C-c>"] = { "actions.close", mode = "n" },
+				["<ESC>"] = { "actions.close", mode = "n" },
+				["q"] = { "actions.close", mode = "n" },
+				["<leader>r"] = "actions.refresh",
+				["<C-h>"] = { "actions.parent", mode = "n" },
+				["<leader>cs"] = { "actions.change_sort", mode = "n" },
+				["<leader>t."] = { "actions.toggle_hidden", mode = "n" },
+				["<leader>tt"] = { "actions.toggle_trash", mode = "n" },
+			},
+		},
+		keys = {
+			{
+				"<leader>e",
+				function()
+					require('oil').open_float(nil, { preview = { vertical = true, split = "aboveleft" }})
+				end,
+				noremap = true,
+				desc = "File Explorer",
+			}
+		},
+	},
+
+	-- {
+	-- 	"benomahony/oil-git.nvim",
+	-- 	dependencies = { "stevearc/oil.nvim" },
+	-- },
+
+	{
+		"JezerM/oil-lsp-diagnostics.nvim",
+		dependencies = { "stevearc/oil.nvim" },
+		opts = {},
 	},
 }

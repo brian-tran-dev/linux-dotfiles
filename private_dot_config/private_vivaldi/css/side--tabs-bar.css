@@ -15,13 +15,6 @@
 	display: none!important;
 }
 
-#browser #main .inner > .tabbar-wrapper:not(:empty) {
-	animation-name: my-tab-slide-in;
-	animation-duration: 150ms;
-	animation-timing-function: ease-out;
-	animation-iteration-count: 1;
-}
-
 #browser.address-top-off:has(#titlebar) #main .inner > .tabbar-wrapper {
 	height: calc(100vh - 38px - 28px);
 }
@@ -109,15 +102,4 @@
 }
 #browser #main .tabbar-wrapper .tabbar-workspace-button .ToolbarButton-Button.button-pressed {
 	border: 1px solid #f6c177;
-}
-
-@keyframes my-tab-slide-in {
-	0% {
-		display: flex;
-		transform: translateY(-50%) translateX(calc(-100% - 14px));
-	}
-	100% {
-		display: flex;
-		transform: translateY(-50%) translateX(0);
-	}
 }

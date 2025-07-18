@@ -39,11 +39,13 @@ return {
 					input = {
 						keys = {
 							["<C-c>"] = { "close", mode = {"i", "n"} },
+							["<C-l>"] = { "confirm", mode = { "n", "i" } },
 						},
 					},
 					list = {
 						keys = {
 							["<C-c>"] = "close",
+							["<C-l>"] = "confirm",
 						},
 					},
 				},

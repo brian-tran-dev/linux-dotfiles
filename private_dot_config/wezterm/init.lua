@@ -21,7 +21,12 @@ config.webgpu_preferred_adapter = {
 config.front_end = "WebGpu"
 config.enable_wayland = false
 
-config.font = wezterm.font("JetbrainsMonoNL Nerd Font", { weight = 'Medium' })
+config.font = wezterm.font_with_fallback {
+	{ family = "JetBrainsMonoNL Nerd Font", weight = 'Medium' },
+	{ family = "Unifont", weight = 'Regular' },
+	{ family = "Unifont CSUR", weight = 'Regular' },
+	{ family = "Unifont Upper", weight = 'Regular' },
+}
 config.use_ime = true
 config.font_size = 12
 config.line_height = 1.5

@@ -1,10 +1,11 @@
 local opt = vim.o
 local api = vim.api
-
 opt.termguicolors = true
+
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
 require("config.diagnostic")
+
 opt.clipboard = "unnamedplus"
 opt.number = true
 opt.relativenumber = false
@@ -19,6 +20,18 @@ opt.scrolloff = 0
 opt.smoothscroll = true
 opt.display = "lastline"
 opt.guicursor = "a:block,n-i-r-cr-i-ci:blinkwait500-blinkon500-blinkoff500,r-cr:hor30,i-ci-ve:ver50"
+
+api.nvim_set_hl(0, "NormalFloat", { bg = "#403b42" })
+api.nvim_set_hl(0, "FloatBorder", { bg = "#403b42", fg = "#6b6d80" })
+api.nvim_set_hl(0, "FloatTitle", { bg = "#403b42", fg = "#a7f3d0" })
+api.nvim_set_hl(0, "LineNr", { fg = "#9390a6" })
+api.nvim_set_hl(0, "CursorLineNr", { fg = "white" })
+
+vim.filetype.add({
+	extension = {
+		ejs = "html",
+	},
+})
 
 ------------------------------------------------------
 ----------------- KEY MAPS ----------------------------

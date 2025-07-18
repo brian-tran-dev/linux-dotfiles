@@ -53,22 +53,3 @@
 	border: 2px solid #6b6d80;
 	transition: none;
 }
-
-#browser #main.left #panels .panel-group:has(.panel) {
-	animation-name: my-panel-slide-in;
-	animation-duration: 100ms;
-	animation-timing-function: ease-out;
-	animation-iteration-count: 1;
-	animation-fill-mode: none;
-}
-
-@keyframes my-panel-slide-in {
-	0% {
-		z-index: -1;
-		transform: translateX(calc(-100% - 14px));
-	}
-	100% {
-		transform: translateX(0);
-		z-index: -1;
-	}
-}
