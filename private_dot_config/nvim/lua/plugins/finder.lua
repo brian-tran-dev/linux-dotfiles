@@ -76,8 +76,27 @@ return {
 			{
 				"<leader>lb",
 				function()
-					Snacks.picker.buffers()
+					Snacks.picker.buffers({ win = {
+						input = {
+							keys = { ["<c-d>"] = { "bufdelete", mode = { "n", "i" } } },
+						}
+					}})
 				end,
+				desc = "Buffers",
+			},
+			{
+				"<C-Tab>",
+				function()
+					Snacks.picker.buffers({
+						current = false,
+						win = {
+							input = {
+								keys = { ["<c-d>"] = { "bufdelete", mode = { "n", "i" } } },
+							},
+						},
+					})
+				end,
+				mode = {'n', 'i', 'v'},
 				desc = "Buffers",
 			},
 			{

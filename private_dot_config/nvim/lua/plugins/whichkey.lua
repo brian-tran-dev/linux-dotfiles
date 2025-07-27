@@ -8,7 +8,7 @@ return {
 
 		filter = function(mapping)
 			local c = mapping.lhs:sub(1, 1)
-			return c == ' ' or c == "'" or c == '"'
+			return c == ' ' or c == "'" or c == '"' or c == 'g' or c == 'q' or c == ';'
 		end,
 
 		spec = {

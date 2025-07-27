@@ -55,10 +55,19 @@ return {
 		},
 		keys = {
 			{
-				"<leader>e",
+				"<leader>se",
 				function()
 					require('oil').open_float(nil, { preview = { vertical = true, split = "aboveleft" }})
 				end,
+				noremap = true,
+				desc = "File Explorer",
+			},
+			{
+				"<C-s>",
+				function()
+					require('oil').open_float(nil, { preview = { vertical = true, split = "aboveleft" }})
+				end,
+				mode = { 'n', 'v', 'i' },
 				noremap = true,
 				desc = "File Explorer",
 			}

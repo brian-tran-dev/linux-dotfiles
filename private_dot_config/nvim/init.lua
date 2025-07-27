@@ -20,6 +20,7 @@ opt.scrolloff = 0
 opt.smoothscroll = true
 opt.display = "lastline"
 opt.guicursor = "a:block,n-i-r-cr-i-ci:blinkwait500-blinkon500-blinkoff500,r-cr:hor30,i-ci-ve:ver50"
+opt.cmdheight = 1
 
 api.nvim_set_hl(0, "NormalFloat", { bg = "#403b42" })
 api.nvim_set_hl(0, "FloatBorder", { bg = "#403b42", fg = "#6b6d80" })
@@ -46,6 +47,10 @@ vim.keymap.set("n", "<leader>wq", "<Cmd>wq<CR>", { noremap = true, desc = "Save 
 vim.keymap.set("n", "<leader>wa", "<Cmd>wqa<CR>", { noremap = true, desc = "Save & Close All" })
 vim.keymap.set("n", "<leader>qq", "<Cmd>q<CR>", { noremap = true, desc = "Close" })
 vim.keymap.set("n", "<leader>qa", "<Cmd>qa<CR>", { noremap = true, desc = "Close all" })
+vim.keymap.set("n", "<leader>;;", ":", { noremap = true, desc = "Vim command" })
+vim.keymap.set("n", "<leader>;l", ":lua ", { noremap = true, desc = "Lua command" })
+vim.keymap.set("n", "<leader>;h", ":help ", { noremap = true, desc = "Help command" })
+vim.keymap.set("n", "<leader>sm", "<cmd>messages<cr>", { noremap = true, desc = "Show messages" })
 
 vim.keymap.set("n", "<leader>gl", function()
 	vim.cmd([[ edit vim.fn.expand('%:p:h') ]])

@@ -87,7 +87,7 @@ end
 local function make_default_keybindings()
 	keybinding.default_bind("NONE", "F11", act.ToggleFullScreen)
 
-	keybinding.default_bind("CTRL", "s", activate_control_mode())
+	keybinding.default_bind("LEADER|CTRL", "b", activate_control_mode())
 
 	------- Sroll Select Search Mode -----------------------------
 	keybinding.default_bind("LEADER", "[", act_cb(scroll_mode.enter))
@@ -160,11 +160,11 @@ end
 
 local function create_control_key_config()
 	return {
-		{ mods = "CTRL", key = "q", action = quit_application() },
+		{ mods = "NONE", key = "F11", action = quit_application() },
 
+		{ mods = "CTRL", key = "q", action = quit_application() },
 		{ mods = "NONE", key = "Escape", action = activate_default_mode() },
 		{ mods = "NONE", key = "q", action = activate_default_mode() },
-		{ mods = "CTRL", key = "s", action = activate_default_mode() },
 
 		{ mods = "CTRL", key = "d", action = act.Multiple {
 			act.CloseCurrentPane({ confirm = true }),
@@ -172,22 +172,22 @@ local function create_control_key_config()
 		}},
 
 		{ mods = "LEADER", key = "j", action = act.SplitPane({ direction = "Down", size = { Percent = 50 } }) },
-		{ mods = "CTRL|SHIFT", key = "j", action = act.Multiple {
+		{ mods = "LEADER|CTRL", key = "j", action = act.Multiple {
 			act.SplitPane({ direction = "Down", size = { Percent = 50 } }),
 			activate_default_mode(),
 		}},
 		{ mods = "LEADER", key = "k", action = act.SplitPane({ direction = "Up", size = { Percent = 50 } }) },
-		{ mods = "CTRL|SHIFT", key = "k", action = act.Multiple {
+		{ mods = "LEADER|CTRL", key = "k", action = act.Multiple {
 			act.SplitPane({ direction = "Up", size = { Percent = 50 } }),
 			activate_default_mode(),
 		}},
 		{ mods = "LEADER", key = "h", action = act.SplitPane({ direction = "Left", size = { Percent = 50 } }) },
-		{ mods = "CTRL|SHIFT", key = "h", action = act.Multiple {
+		{ mods = "LEADER|CTRL", key = "h", action = act.Multiple {
 			act.SplitPane({ direction = "Left", size = { Percent = 50 } }),
 			activate_default_mode(),
 		}},
 		{ mods = "LEADER", key = "l", action = act.SplitPane({ direction = "Right", size = { Percent = 50 } }) },
-		{ mods = "CTRL|SHIFT", key = "l", action = act.Multiple {
+		{ mods = "LEADER|CTRL", key = "l", action = act.Multiple {
 			act.SplitPane({ direction = "Right", size = { Percent = 50 } }),
 			activate_default_mode(),
 		}},
@@ -218,7 +218,6 @@ local function create_control_key_config()
 			activate_default_mode(),
 		}},
 
-		{ mods = "", key = "w", action = act.CloseCurrentTab({ confirm = true }) },
 		{ mods = "CTRL", key = "w", action = act.Multiple {
 			act.CloseCurrentTab({ confirm = true }),
 			activate_default_mode(),

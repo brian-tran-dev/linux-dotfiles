@@ -44,11 +44,11 @@ return {
 			},
 			-- you can enable a preset for easier configuration
 			presets = {
-				bottom_search = true, -- use a classic bottom cmdline for search
-				command_palette = true, -- position the cmdline and popupmenu together
+				bottom_search = false, -- use a classic bottom cmdline for search
+				command_palette = false, -- position the cmdline and popupmenu together
 				long_message_to_split = true, -- long messages will be sent to a split
 				inc_rename = false, -- enables an input dialog for inc-rename.nvim
-				lsp_doc_border = false, -- add a border to hover docs and signature help
+				lsp_doc_border = true, -- add a border to hover docs and signature help
 			},
 			---@type NoiceConfigViews
 			views = {
@@ -60,6 +60,9 @@ return {
 					win_options = {
 						winblend = 10,
 					},
+					position = {
+						row = -2,
+					}
 				},
 				lsp_hover = {
 					view = "popup",
@@ -99,6 +102,18 @@ return {
 	},
 
 	{
+		"brian-tran-dev/nvim-recorder",
+		dependencies = { "rcarriga/nvim-notify" }, -- optional
+		--- @type configObj
+		---@diagnostic disable-next-line: missing-fields
+		opts = {
+			logLevel = vim.log.levels.WARN,
+			slots = { "a", "b", "c" },
+			lessNotifications = true,
+		},
+	},
+
+	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
@@ -106,7 +121,11 @@ return {
 			'stevearc/aerial.nvim',
 		},
 		opts = {
-			theme = "dracular",
+			options = {
+				refresh = {
+					statusline = 50,
+				},
+			},
 			sections = {
 				lualine_a = {{ "mode", fmt = function(str) return str:sub(1,1) end }},
 				lualine_b = { "branch", "diagnostics" },
@@ -120,12 +139,16 @@ return {
 					"aerial",
 				},
 
+
 				lualine_x = {},
 				lualine_y = {
 					{
-						require("noice").api.statusline.mode.get,
-						cond = require("noice").api.statusline.mode.has,
+						function() return require("recorder").recordingStatus() end,
 						color = { fg = "#ff9e64" },
+					},
+					{
+						function() return require("recorder").displaySlots() end,
+						color = { fg = "#e3e1e4" }
 					},
 					"encoding",
 					"filetype",
@@ -177,4 +200,5 @@ return {
 			vim.keymap.set({ "n", "i" }, "<C-k>", function() neoscroll.scroll(-1, { duration = 1 }) end, { desc = "scroll up" })
 		end
 	},
+
 }

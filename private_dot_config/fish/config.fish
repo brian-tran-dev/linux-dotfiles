@@ -65,6 +65,9 @@ if status is-interactive
 	starship init fish | source
 	fzf --fish | source
 	zoxide init fish | source
+
+	source (pyenv virtualenv-init -|psub)
+	pyenv init - fish | source
 end
 
 source "$HOME/.cargo/env.fish"
@@ -85,3 +88,8 @@ set -gxp MANPATH /home/brian/.local/texlive/2025/texmf-dist/doc/man
 set -gxp INFOPATH /home/brian/.local/texlive/2025/texmf-dist/doc/info
 set -gxp PATH /home/brian/.local/texlive/2025/bin/x86_64-linux
 # texlive end
+
+# pyenv
+set -gx PYENV_ROOT $HOME/.pyenv
+test -d $PYENV_ROOT/bin; and set -gxp PATH "$PYENV_ROOT/bin"
+# pyenv
