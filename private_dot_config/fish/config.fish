@@ -16,13 +16,13 @@ else
 end
 
 # Install NodeJS
-if test -z (fisher list nvm)
+if test -z "$(fisher list nvm)"
 	fisher install jorgebucaran/nvm.fish
 	nvm install lts
 	set --universal nvm_default_version lts
 end
 
-if test -z (nvm list)
+if test -z "$(nvm list)"
 	nvm install lts
 	set --universal nvm_default_version lts
 end
