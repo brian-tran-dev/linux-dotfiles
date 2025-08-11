@@ -31,7 +31,51 @@ return {
 	},
 
 	{
-		"brian-tran-dev/blink.cmp",
+		"saghen/blink.compat",
+		version = "*",
+		lazy = true,
+		opts = {}
+	},
+
+	{
+		"Jezda1337/nvim-html-css",
+		dependencies = { "saghen/blink.cmp", "nvim-treesitter/nvim-treesitter" }, -- Use this if you're using blink.cmp
+		opts = {
+			enable_on = { -- Example file types
+				"html",
+				"htmldjango",
+				"tsx",
+				"jsx",
+				"erb",
+				"svelte",
+				"vue",
+				"blade",
+				"php",
+				"templ",
+				"astro",
+			},
+			handlers = {
+				definition = {
+					bind = "<leader>gd"
+				},
+				hover = {
+					bind = "<leader>sd",
+					wrap = true,
+					border = "none",
+					position = "cursor",
+				},
+			},
+			documentation = {
+				auto_show = true,
+			},
+			style_sheets = {
+				"https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css",
+			},
+		},
+	},
+
+	{
+		"saghen/blink.cmp",
 		-- optional: provides snippets for the snippet source
 		dependencies = {
 			"rafamadriz/friendly-snippets",
@@ -51,14 +95,20 @@ return {
 				preset = "none",
 				["<C-n>"] = { "show", "select_next", "fallback" },
 				["<C-A-n>"] = { "select_prev", "fallback" },
-				["<C-k>"] = {
+				["<C-A-k>"] = {
 					"scroll_documentation_up",
+					"fallback",
+				},
+				["<C-k>"] = {
 					"select_prev",
 					"scroll_signature_up",
 					"fallback",
 				},
-				["<C-j>"] = {
+				["<C-A-j>"] = {
 					"scroll_documentation_down",
+					"fallback",
+				},
+				["<C-j>"] = {
 					"select_next",
 					"scroll_signature_down",
 					"fallback",
@@ -77,7 +127,7 @@ return {
 
 			completion = {
 				documentation = {
-					auto_show = false,
+					auto_show = true,
 					window = {
 						max_height = 10,
 						border = "rounded",
@@ -147,7 +197,13 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer" },
+				default = { "lsp", "path", "snippets", "buffer", "html-css" },
+				providers = {
+					["html-css"] = {
+						name = "html",
+						module = "blink.compat.source"
+					}
+				}
 			},
 
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
@@ -193,6 +249,7 @@ return {
 			vim.api.nvim_set_hl(0, "BlinkCmpGhostText", { fg = "#848089" })
 		end,
 	},
+
 
 	{
 		"catgoose/nvim-colorizer.lua",

@@ -9,9 +9,16 @@ return {
 			columns = { "size", "icon" },
 			view_options = {
 				show_hidden = true,
+
+				-- This function defines what is considered a "hidden" file
+				is_hidden_file = function(name)
+					local m = name:match("^(%.)")
+					return m ~= nil
+				end,
+
 				is_always_hidden = function(name)
-					return name == '..'
-				end
+					return name == ".."
+				end,
 			},
 			float = {
 				padding = 2,
@@ -43,10 +50,10 @@ return {
 				["<C-l>"] = "actions.select",
 				["<leader>gv"] = { "actions.select", opts = { vertical = true } },
 				["<leader>gh"] = { "actions.select", opts = { horizontal = true } },
-				["<C-c>"] = { "actions.close", mode = {"n", "i", "v"} },
+				["<C-c>"] = { "actions.close", mode = { "n", "i", "v" } },
 				["<ESC>"] = { "actions.close", mode = "n" },
 				["q"] = { "actions.close", mode = "n" },
-				["<C-s>"] = { "actions.close", mode = {"n", "i", "v"} },
+				["<C-s>"] = { "actions.close", mode = { "n", "i", "v" } },
 				["<leader>r"] = "actions.refresh",
 				["<C-h>"] = { "actions.parent", mode = "n" },
 				["<leader>cs"] = { "actions.change_sort", mode = "n" },
@@ -59,7 +66,7 @@ return {
 			{
 				"<leader>se",
 				function()
-					require('oil').open_float(nil, { preview = { vertical = true, split = "aboveleft" }})
+					require("oil").open_float(nil, { preview = { vertical = true, split = "aboveleft" } })
 				end,
 				noremap = true,
 				desc = "File Explorer",
@@ -67,19 +74,14 @@ return {
 			{
 				"<C-s>",
 				function()
-					require('oil').open_float(nil, { preview = { vertical = true, split = "aboveleft" }})
+					require("oil").open_float(nil, { preview = { vertical = true, split = "aboveleft" } })
 				end,
-				mode = { 'n', 'v', 'i' },
+				mode = { "n", "v", "i" },
 				noremap = true,
 				desc = "File Explorer",
-			}
+			},
 		},
 	},
-
-	-- {
-	-- 	"benomahony/oil-git.nvim",
-	-- 	dependencies = { "stevearc/oil.nvim" },
-	-- },
 
 	{
 		"JezerM/oil-lsp-diagnostics.nvim",

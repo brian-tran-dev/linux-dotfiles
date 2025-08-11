@@ -17,6 +17,7 @@ sethandler <C-n> a:vim
 sethandler <C-p> a:ide
 sethandler <C-q> a:ide
 sethandler <C-r> a:vim
+sethandler <C-s> a:ide
 sethandler <C-v> a:vim
 sethandler <C-w> a:ide
 
@@ -26,20 +27,21 @@ sethandler <A-h> a:vim
 sethandler <A-l> a:vim
 sethandler <A-d> a:vim
 
+map <leader>ww <Action>(SaveAll)
+map <leader>qq <Action>(CloseContent)
 
 map <leader>rf <Action>(ReformatCode)
-map <leader>rne <Action>(RenameElement)
+map <leader>rn <Action>(RenameElement)
 map <leader>rp <Action>(Replace)
 map <leader>rs <Action>(RestartIde)<Enter>
-map <leader>rnf <Action>(RenameFile)
 
 map <leader>ha <Action>(HideAllWindows)
 
 map <leader>da <Action>(ActivateProblemsViewToolWindow)
 map <leader>ds <Action>(ShowErrorDescription)
-map <leader>dl <Action>(GotoNextError)
-map <leader>dh <Action>(GotoPreviousError)
-map <leader>df <Action>(ShowIntentionActions)
+map <leader>dn <Action>(GotoNextError)
+map <leader>dp <Action>(GotoPreviousError)
+map <leader>la <Action>(ShowIntentionActions)
 
 map <leader>cfp <Action>(CopyReferencePopupGroup)
 
@@ -47,16 +49,9 @@ map <leader>sd <Action>(QuickJavaDoc)
 
 map <leader>fs <Action>(Switcher)
 map <leader>fd <Action>(ActivateProblemsViewToolWindow)
-map <leader>fr <Action>(ActivateRunToolWindow)
+map <leader>fg <Action>(FindInPath)
 map <leader>fid <Action>(VimFindActionIdAction)
 
-"nmap gcc <Action>(CommentByLineComment)
-"vmap gc <Action>(CommentByLineComment)<ESC>
-"map [ <Action>(EditorSelectWord)
-"map ] <Action>(EditorUnSelectWord)
-"map % <Action>(EditorMatchBrace)
-"map <C-K> <Action>(MoveLineUp)
-"map <C-J> <Action>(MoveLineDown)
 map <A-k> <Action>(TabShiftActions.MoveFocusUp)
 map! <A-k> <Action>(TabShiftActions.MoveFocusUp)
 map <A-j> <Action>(TabShiftActions.MoveFocusDown)

@@ -55,14 +55,14 @@ return {
 				mini = {
 					timeout = 3000,
 					border = {
-						style = "rounded"
+						style = "rounded",
 					},
 					win_options = {
 						winblend = 10,
 					},
 					position = {
 						row = -2,
-					}
+					},
 				},
 				lsp_hover = {
 					view = "popup",
@@ -85,13 +85,14 @@ return {
 						wrap = true,
 						linebreak = true,
 					},
+					scrollbar = true,
 				},
-			}
+			},
 		},
 	},
 
 	{
-		'stevearc/aerial.nvim',
+		"stevearc/aerial.nvim",
 		opts = {},
 		-- Optional dependencies
 		dependencies = {
@@ -118,7 +119,7 @@ return {
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 			"folke/noice.nvim",
-			'stevearc/aerial.nvim',
+			"stevearc/aerial.nvim",
 		},
 		opts = {
 			options = {
@@ -127,7 +128,12 @@ return {
 				},
 			},
 			sections = {
-				lualine_a = {{ "mode", fmt = function(str) return str:sub(1,1) end }},
+				lualine_a = { {
+					"mode",
+					fmt = function(str)
+						return str:sub(1, 1)
+					end,
+				} },
 				lualine_b = { "branch", "diagnostics" },
 				lualine_c = {
 					{
@@ -139,23 +145,31 @@ return {
 					"aerial",
 				},
 
-
 				lualine_x = {},
 				lualine_y = {
 					{
-						function() return require("recorder").recordingStatus() end,
+						function()
+							return require("recorder").recordingStatus()
+						end,
 						color = { fg = "#ff9e64" },
 					},
 					{
-						function() return require("recorder").displaySlots() end,
-						color = { fg = "#e3e1e4" }
+						function()
+							return require("recorder").displaySlots()
+						end,
+						color = { fg = "#e3e1e4" },
 					},
 					"encoding",
 					"filetype",
 				},
 				lualine_z = {
-					{ "location", fmt = function(str) return vim.trim(str) end },
-					"selectioncount"
+					{
+						"location",
+						fmt = function(str)
+							return vim.trim(str)
+						end,
+					},
+					"selectioncount",
 				},
 			},
 		},
@@ -163,42 +177,39 @@ return {
 
 	{
 		"folke/twilight.nvim",
-		config = function ()
-			vim.keymap.set(
-				"n", "<leader>tf",
-				function()
-					vim.cmd[[ Twilight ]]
-				end,
-				{ desc = "Toggle focus mode"}
-			)
-		end
-	},
-
-	{
-		"petertriho/nvim-scrollbar",
-		opts = {
-			hide_if_all_visible = true,
-			throttle_ms = 10,
-
-			handle = {
-				blend = 0,
-				color = "#575159",
-			},
-			handlers = {
-				cursor = false
-			},
-		},
+		config = function()
+			vim.keymap.set("n", "<leader>tf", function()
+				vim.cmd([[ Twilight ]])
+			end, { desc = "Toggle focus mode" })
+		end,
 	},
 
 	{
 		"karb94/neoscroll.nvim",
 		opts = { mappings = {} },
-		config = function (_, opts)
+		config = function(_, opts)
 			local neoscroll = require("neoscroll")
 			neoscroll.setup(opts)
-			vim.keymap.set({ "n", "i" }, "<C-j>", function() neoscroll.scroll(1, { duration = 1 }) end, { desc = "scroll down" })
-			vim.keymap.set({ "n", "i" }, "<C-k>", function() neoscroll.scroll(-1, { duration = 1 }) end, { desc = "scroll up" })
-		end
+			vim.keymap.set({ "n", "i" }, "<C-j>", function()
+				neoscroll.scroll(1, { duration = 1 })
+			end, { desc = "scroll down" })
+			vim.keymap.set({ "n", "i" }, "<C-k>", function()
+				neoscroll.scroll(-1, { duration = 1 })
+			end, { desc = "scroll up" })
+		end,
+	},
+
+	{
+		'lewis6991/satellite.nvim',
+		opts = {
+			current_only = false,
+			winblend = 0,
+			handlers = {
+				cursor = {
+					enable = false,
+				},
+			},
+		},
 	},
 
 }
