@@ -38,47 +38,11 @@ return {
 	},
 
 	{
-		"Jezda1337/nvim-html-css",
-		dependencies = { "saghen/blink.cmp", "nvim-treesitter/nvim-treesitter" }, -- Use this if you're using blink.cmp
-		opts = {
-			enable_on = { -- Example file types
-				"html",
-				"htmldjango",
-				"tsx",
-				"jsx",
-				"erb",
-				"svelte",
-				"vue",
-				"blade",
-				"php",
-				"templ",
-				"astro",
-			},
-			handlers = {
-				definition = {
-					bind = "<leader>gd"
-				},
-				hover = {
-					bind = "<leader>sd",
-					wrap = true,
-					border = "none",
-					position = "cursor",
-				},
-			},
-			documentation = {
-				auto_show = true,
-			},
-			style_sheets = {
-				"https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css",
-			},
-		},
-	},
-
-	{
 		"saghen/blink.cmp",
 		-- optional: provides snippets for the snippet source
 		dependencies = {
 			"rafamadriz/friendly-snippets",
+			"saghen/blink.compat",
 		},
 
 		-- use a release tag to download pre-built binaries
@@ -104,11 +68,21 @@ return {
 					"scroll_signature_up",
 					"fallback",
 				},
+				["<Up>"] = {
+					"select_prev",
+					"scroll_signature_up",
+					"fallback",
+				},
 				["<C-A-j>"] = {
 					"scroll_documentation_down",
 					"fallback",
 				},
 				["<C-j>"] = {
+					"select_next",
+					"scroll_signature_down",
+					"fallback",
+				},
+				["<Down>"] = {
 					"select_next",
 					"scroll_signature_down",
 					"fallback",
@@ -128,6 +102,7 @@ return {
 			completion = {
 				documentation = {
 					auto_show = true,
+					update_delay_ms = 50,
 					window = {
 						max_height = 10,
 						border = "rounded",
@@ -200,7 +175,7 @@ return {
 				default = { "lsp", "path", "snippets", "buffer", "html-css" },
 				providers = {
 					["html-css"] = {
-						name = "html",
+						name = "html-css",
 						module = "blink.compat.source"
 					}
 				}
@@ -248,6 +223,44 @@ return {
 			cmp.setup(opts)
 			vim.api.nvim_set_hl(0, "BlinkCmpGhostText", { fg = "#848089" })
 		end,
+	},
+
+	{
+		"Jezda1337/nvim-html-css",
+		dependencies = { "saghen/blink.cmp", "nvim-treesitter/nvim-treesitter" }, -- Use this if you're using blink.cmp
+		opts = {
+			enable_on = { -- Example file types
+				"ejs",
+				"html",
+				"htmldjango",
+				"tsx",
+				"jsx",
+				"erb",
+				"svelte",
+				"vue",
+				"blade",
+				"php",
+				"templ",
+				"astro",
+			},
+			handlers = {
+				definition = {
+					bind = "<leader>gd"
+				},
+				hover = {
+					bind = "<leader>sd",
+					wrap = true,
+					border = "none",
+					position = "cursor",
+				},
+			},
+			documentation = {
+				auto_show = true,
+			},
+			style_sheets = {
+				"https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css",
+			},
+		},
 	},
 
 

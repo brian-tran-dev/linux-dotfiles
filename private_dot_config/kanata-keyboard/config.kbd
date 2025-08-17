@@ -15,24 +15,31 @@
 
 (deflayer qwerty
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  lctl @a   s    d    f    g    h    j    k    l    ;    '    ret
+  @tab q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @ctl @a   s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   @cap lalt           spc            ralt rmet rctl
 )
 
 (deflayer vim-like
-  nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0
+  nop0 C-f1 C-f2 C-f3 C-f4 C-f5 C-f6 C-f7 C-f8 C-f9 nop0 nop0 nop0 nop0
   nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 bspc ret  nop0 esc  nop0 nop0
   nop0 nop0 lsft del  nop0 nop0 left down up   rght nop0 nop0 nop0
   nop0 nop0 del  lctl nop0 nop0 home pgdn pgup end  nop0 nop0
   nop0 lalt           nop0           nop0 nop0 nop0
 )
 
+(defvirtualkeys
+	ctrl lctrl
+	ctrl2 (macro (on-release release-vkey ctrl) (on-release tap-vkey ctrl))
+)
+
 (defalias
 	vim  (layer-toggle vim-like)
 	a (tap-hold 0 200 a @vim)
+	tab (tap-hold 0 200 tab @vim)
 	cap (tap-hold 0 200 caps @vim)
+	ctl (multi (on-press press-vkey ctrl) (on-release tap-vkey ctrl2))
 )
 
 (defoverrides

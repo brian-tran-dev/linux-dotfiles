@@ -48,6 +48,7 @@ return {
 			keymaps = {
 				["g?"] = { "actions.show_help", mode = "n" },
 				["<C-l>"] = "actions.select",
+				["<Enter>"] = "actions.select",
 				["<leader>gv"] = { "actions.select", opts = { vertical = true } },
 				["<leader>gh"] = { "actions.select", opts = { horizontal = true } },
 				["<C-c>"] = { "actions.close", mode = { "n", "i", "v" } },
