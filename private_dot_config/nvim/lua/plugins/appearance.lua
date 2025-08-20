@@ -198,18 +198,4 @@ return {
 			end, { desc = "scroll up" })
 		end,
 	},
-
-	{
-		'lewis6991/satellite.nvim',
-		opts = {
-			current_only = false,
-			winblend = 0,
-			handlers = {
-				cursor = {
-					enable = false,
-				},
-			},
-		},
-	},
-
 }

@@ -172,7 +172,7 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer", "html-css" },
+				default = { "html-css", "lsp", "path", "snippets", "buffer" },
 				providers = {
 					["html-css"] = {
 						name = "html-css",
