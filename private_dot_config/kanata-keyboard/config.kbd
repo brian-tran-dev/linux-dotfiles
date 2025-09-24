@@ -22,7 +22,7 @@
 )
 
 (deflayer vim-like
-  nop0 C-f1 C-f2 C-f3 C-f4 C-f5 C-f6 C-f7 C-f8 C-f9 nop0 nop0 nop0 nop0
+  M-w  C-f1 C-f2 C-f3 C-f4 C-f5 C-f6 C-f7 C-f8 C-f9 nop0 nop0 nop0 nop0
   nop0 nop0 nop0 nop0 nop0 nop0 nop0 nop0 bspc ret  nop0 esc  nop0 nop0
   nop0 nop0 lsft del  nop0 nop0 left down up   rght nop0 nop0 nop0
   nop0 nop0 del  lctl nop0 nop0 home pgdn pgup end  nop0 nop0

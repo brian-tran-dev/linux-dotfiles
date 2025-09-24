@@ -1,7 +1,9 @@
 return {
 	{
 		"windwp/nvim-ts-autotag",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter"
+		},
 		opts = {
 			opts = {
 				enable_close = true, -- Auto close tags
@@ -20,10 +22,10 @@ return {
 		"m4xshen/autoclose.nvim",
 		opts = {},
 	},
-	{
-		"RRethy/nvim-treesitter-endwise",
-		config = function()
-			require("nvim-treesitter-endwise").init()
-		end
-	},
+	-- {
+	-- 	"RRethy/nvim-treesitter-endwise",
+	-- 	config = function()
+	-- 		require("nvim-treesitter-endwise").init()
+	-- 	end
+	-- },
 }

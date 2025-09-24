@@ -101,7 +101,7 @@ return {
 			"onsails/lspkind.nvim",
 		},
 	},
-
+	--
 	{
 		"brian-tran-dev/nvim-recorder",
 		dependencies = { "rcarriga/nvim-notify" }, -- optional
@@ -134,7 +134,7 @@ return {
 						return str:sub(1, 1)
 					end,
 				} },
-				lualine_b = { "branch", "diagnostics" },
+				lualine_b = { "diagnostics" },
 				lualine_c = {
 					{
 						"filename",

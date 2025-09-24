@@ -1,5 +1,11 @@
 return {
-	{ "neovim/nvim-lspconfig" },
+	{
+		"neovim/nvim-lspconfig",
+		config = function()
+			vim.lsp.log.set_level("trace")
+			vim.lsp.log.set_format_func(vim.inspect)
+		end,
+	},
 	{
 		"mason-org/mason-lspconfig.nvim",
 		dependencies = {
@@ -21,7 +27,7 @@ return {
 		"brian-tran-dev/nvim-pretty_hover",
 		opts = {
 			max_height = 10,
-			border = 'rounded',
+			border = "rounded",
 		},
 		config = function(_, opts)
 			local hover = require("pretty_hover")
@@ -34,7 +40,7 @@ return {
 		"saghen/blink.compat",
 		version = "*",
 		lazy = true,
-		opts = {}
+		opts = {},
 	},
 
 	{
@@ -172,13 +178,18 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { "html-css", "lsp", "path", "snippets", "buffer" },
+				default = { "lsp", "buffer", "path", "snippets", "html-css" },
+				per_filetype = {
+					html = { "lsp", "html-css", "snippets", "path", "buffer" },
+					css = { "lsp", "html-css", "path", "snippets", "buffer" },
+					js = { "lsp", "buffer", "path", "html-css" },
+				},
 				providers = {
 					["html-css"] = {
 						name = "html-css",
-						module = "blink.compat.source"
-					}
-				}
+						module = "blink.compat.source",
+					},
+				},
 			},
 
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
@@ -192,7 +203,7 @@ return {
 					"exact",
 					"score",
 					"sort_text",
-				}
+				},
 			},
 
 			cmdline = {
@@ -227,7 +238,10 @@ return {
 
 	{
 		"Jezda1337/nvim-html-css",
-		dependencies = { "saghen/blink.cmp", "nvim-treesitter/nvim-treesitter" }, -- Use this if you're using blink.cmp
+		dependencies = {
+			"saghen/blink.cmp",
+			"nvim-treesitter/nvim-treesitter",
+		}, -- Use this if you're using blink.cmp
 		opts = {
 			enable_on = { -- Example file types
 				"ejs",
@@ -245,12 +259,12 @@ return {
 			},
 			handlers = {
 				definition = {
-					bind = "<leader>gd"
+					bind = "<leader>gd",
 				},
 				hover = {
 					bind = "<leader>sd",
 					wrap = true,
-					border = "none",
+					border = "rounded",
 					position = "cursor",
 				},
 			},
@@ -262,7 +276,6 @@ return {
 			},
 		},
 	},
-
 
 	{
 		"catgoose/nvim-colorizer.lua",
@@ -315,7 +328,7 @@ return {
 				end,
 				mode = { "n", "x" },
 				desc = "List code actions",
-			}
-		}
+			},
+		},
 	},
 }

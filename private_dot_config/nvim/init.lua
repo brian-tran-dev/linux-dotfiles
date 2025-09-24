@@ -70,15 +70,15 @@ api.nvim_create_autocmd("BufEnter", {
 				api.nvim_buf_delete(buf, { force = true })
 			end, { buffer = buf, noremap = true, desc = "Exit" })
 		end
-	end
+	end,
 })
 api.nvim_create_autocmd({ "BufDelete", "BufUnload", "BufHidden" }, {
 	pattern = "*",
-	callback = function (args)
+	callback = function(args)
 		if bufs_with_exit_shortcuts[args.buf] then
 			bufs_with_exit_shortcuts[args.buf] = nil
 		end
-	end
+	end,
 })
 --------------------------------------------------
 
@@ -96,3 +96,5 @@ end, { noremap = true, desc = "Next Buffer" })
 vim.keymap.set({ "n", "i" }, "<c-h>", "<c-o>", { noremap = true, desc = "Previous Jump" })
 vim.keymap.set({ "n", "i" }, "<c-l>", "<c-i>", { noremap = true, desc = "Next Jump" })
 --------------------------------------------------
+
+require("init_python_loader")

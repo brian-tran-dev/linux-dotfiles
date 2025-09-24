@@ -29,7 +29,11 @@ config.font = wezterm.font_with_fallback {
 }
 config.use_ime = true
 config.font_size = 12
-config.line_height = 1.5
+config.line_height = 1.4
+-- config.font_size = 14
+-- config.line_height = 1.5
+-- config.font_size = 17
+-- config.line_height = 1.5
 config.cell_width = 1.05
 
 config.automatically_reload_config = false

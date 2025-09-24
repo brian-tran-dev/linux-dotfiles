@@ -18,6 +18,7 @@ return {
 				jsonc = { "biome-format" },
 				yaml = { "prettier" },
 				markdown = { "prettier" },
+				toml = { "taplo" }
 			},
 			format_on_save = function() end,
 		},
