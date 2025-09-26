@@ -1,7 +1,13 @@
 #browser .button-popup {
 	margin-left: 14px;
 	--colorBgDark: #4a4c59;
+	--colorBgIntense: #4a4c59;
 	--colorBgLight: #4a4c59;
+	--colorBgLighter: #4a4c59;
+
+	.TabButtonPopup {
+		background: var(--colorBgDark);
+	}
 }
 #browser .button-popup::before {
 	display: none;

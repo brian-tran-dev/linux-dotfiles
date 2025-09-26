@@ -2,8 +2,17 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			vim.lsp.log.set_level("trace")
-			vim.lsp.log.set_format_func(vim.inspect)
+			-- vim.lsp.log.set_level("trace")
+			-- vim.lsp.log.set_format_func(vim.inspect)
+			vim.lsp.config.pyright = {
+				settings = {
+					python = {
+						analysis = {
+							diagnosticMode = "workspace",
+						},
+					},
+				},
+			}
 		end,
 	},
 	{
