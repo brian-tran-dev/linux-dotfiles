@@ -1,9 +1,23 @@
 #browser .button-popup {
-	margin-left: 14px;
 	--colorBgDark: #4a4c59;
 	--colorBgIntense: #4a4c59;
 	--colorBgLight: #4a4c59;
 	--colorBgLighter: #4a4c59;
+
+	&.button-popup-pos-right {
+		margin-left: 21px;
+	}
+
+	&:has(.WorkspacePopup) {
+		margin-left: -164px;
+		margin-top: 8px;
+		min-width: 330px;
+		border: 2px solid #6b6d80;
+	}
+
+	&.button-popup-pos-below:has(.TabButtonPopup) {
+		margin-left: 4px;
+	}
 
 	.TabButtonPopup {
 		background: var(--colorBgDark);
