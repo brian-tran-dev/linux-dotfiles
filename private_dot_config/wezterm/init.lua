@@ -28,10 +28,10 @@ config.font = wezterm.font_with_fallback {
 	{ family = "Unifont Upper", weight = 'Regular' },
 }
 config.use_ime = true
--- config.font_size = 12
--- config.line_height = 1.4
-config.font_size = 14
-config.line_height = 1.5
+config.font_size = 12
+config.line_height = 1.4
+-- config.font_size = 14
+-- config.line_height = 1.5
 -- config.font_size = 17
 -- config.line_height = 1.5
 config.cell_width = 1.05

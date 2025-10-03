@@ -4,11 +4,13 @@ return {
 		config = function()
 			-- vim.lsp.log.set_level("trace")
 			-- vim.lsp.log.set_format_func(vim.inspect)
-			vim.lsp.config.pyright = {
+			vim.lsp.config.basedpyright = {
 				settings = {
 					python = {
 						analysis = {
 							diagnosticMode = "workspace",
+							autoImportCompletions = true,
+							typeCheckingMode = "strict",
 						},
 					},
 				},
