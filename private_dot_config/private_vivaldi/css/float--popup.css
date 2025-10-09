@@ -5,7 +5,7 @@
 	--colorBgLighter: #4a4c59;
 
 	&.button-popup-pos-right {
-		margin-left: 21px;
+		margin-left: 2px;
 	}
 
 	&:has(.WorkspacePopup) {

@@ -5,8 +5,8 @@
 	},
 	"workspace": {
 		"library": [
-			"/home/linuxbrew/.linuxbrew/share/nvim/runtime",
-			"/home/brian/.local/share/nvim/lazy"
+			"/usr/local/stow/nvim-0.11.4/share/nvim/runtime/",
+			"/home/tpakhoa/.local/share/nvim/lazy/"
 		]
 	}
 }

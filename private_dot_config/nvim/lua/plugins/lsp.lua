@@ -30,6 +30,8 @@ return {
 				"ts_ls",
 				"cssls",
 				"emmet_ls",
+				"taplo",
+				"rust-analyzer",
 			},
 		},
 	},

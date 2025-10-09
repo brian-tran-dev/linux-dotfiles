@@ -1,0 +1,20 @@
+font-family = "JetBrains Mono"
+theme = "Monokai Pro"
+window-theme = "ghostty"
+window-padding-y = 0
+
+window-show-tab-bar = "always"
+gtk-wide-tabs = false
+mouse-hide-while-typing = true
+
+adjust-cursor-thickness=300%
+adjust-cell-height=40%
+
+cursor-invert-fg-bg = true
+cursor-opacity = 0.8
+cursor-color=cell-foreground
+cursor-text=cell-background
+
+window-save-state = always
+
+config-file=keybindings

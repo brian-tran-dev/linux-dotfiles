@@ -1,20 +1,3 @@
-if not test -e "/home/linuxbrew/.linuxbrew/bin/brew"
-	echo "Installing brew..."
-	bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-	brew install neovim
-	brew install eza
-	brew install fzf
-	brew install starship
-	brew install zoxide
-	brew install bat
-	brew install ripgrep
-	brew install fd
-	brew install yazi
-else
-	eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-end
-
 # Install NodeJS
 if test -z "$(fisher list nvm)"
 	fisher install jorgebucaran/nvm.fish
@@ -65,16 +48,13 @@ if status is-interactive
 	starship init fish | source
 	fzf --fish | source
 	zoxide init fish | source
-
-	source (pyenv virtualenv-init -|psub)
-	pyenv init - fish | source
 end
 
 source "$HOME/.cargo/env.fish"
 
 # bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
+set -gx BUN_INSTALL "$HOME/.bun"
+set -gxp PATH $BUN_INSTALL/bin
 
 # pnpm
 set -gx PNPM_HOME "/home/brian/.local/share/pnpm"
@@ -88,8 +68,3 @@ set -gxp MANPATH /home/brian/.local/texlive/2025/texmf-dist/doc/man
 set -gxp INFOPATH /home/brian/.local/texlive/2025/texmf-dist/doc/info
 set -gxp PATH /home/brian/.local/texlive/2025/bin/x86_64-linux
 # texlive end
-
-# pyenv
-set -gx PYENV_ROOT $HOME/.pyenv
-test -d $PYENV_ROOT/bin; and set -gxp PATH "$PYENV_ROOT/bin"
-# pyenv

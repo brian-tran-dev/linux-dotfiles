@@ -1,8 +1,8 @@
 #
-# /home/brian/.nvidia-settings-rc
+# /home/tpakhoa/.nvidia-settings-rc
 #
 # Configuration file for nvidia-settings - the NVIDIA Settings utility
-# Generated on Thu Oct  2 22:52:37 2025
+# Generated on Mon Oct  6 01:51:01 2025
 #
 
 # ConfigProperties:
@@ -13,9 +13,9 @@ SliderTextEntries = Yes
 IncludeDisplayNameInConfigFile = No
 ShowQuitDialog = Yes
 UpdateRulesOnProfileNameChange = Yes
-Timer = Memory_Used_(GPU_0),Yes,3000
-Timer = Thermal_Monitor_(GPU_0),Yes,1000
 Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
+Timer = Thermal_Monitor_(GPU_0),Yes,1000
+Timer = Memory_Used_(GPU_0),Yes,3000
 
 # Attributes:
 
@@ -25,6 +25,6 @@ Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
 0/FXAA=0
 0/FSAAAppControlled=1
 0/LogAnisoAppControlled=1
-0/OpenGLImageSettings=1
+0/OpenGLImageSettings=3
 0/FSAAAppEnhanced=0
 0/ShowGraphicsVisualIndicator=0

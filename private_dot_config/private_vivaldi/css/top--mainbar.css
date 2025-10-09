@@ -15,6 +15,11 @@
 	display: none;
 }
 
+#browser .mainbar .toolbar.toolbar-visible .button-toolbar.toolbar-spacer-panel,
+#browser .mainbar .toolbar.toolbar-visible .button-toolbar.toolbar-spacer {
+	display: none;
+}
+
 #browser .mainbar .toolbar.toolbar-visible .UrlBar-AddressField *:has(>svg) {
 	display: flex;
 }

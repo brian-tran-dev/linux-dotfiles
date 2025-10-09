@@ -98,3 +98,4 @@ vim.keymap.set({ "n", "i" }, "<c-l>", "<c-i>", { noremap = true, desc = "Next Ju
 --------------------------------------------------
 
 require("init_python_loader")
+require("neovide")

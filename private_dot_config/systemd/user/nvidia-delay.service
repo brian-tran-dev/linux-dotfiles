@@ -1,0 +1,11 @@
+[Unit]
+Description=Load NVIDIA after login
+After=graphical-session.target
+Wants=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'sleep 10; /usr/bin/nvidia-settings --load-config-only'
+
+[Install]
+WantedBy=default.target

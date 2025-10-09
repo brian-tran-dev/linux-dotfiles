@@ -1,0 +1,16 @@
+[Unit]
+Description=Kanata Service
+Wants=dev-input-by\x2dpath-platform-i8042-serio0-event-kbd.device
+After=dev-input-by\x2dpath-platform-i8042-serio0-event-kbd.device
+Before=multi-user.target
+
+[Service]
+ExecStartPre=/usr/sbin/modprobe uinput
+ExecSearchPath=/home/tpakhoa/Software/kanata/target/debug
+WorkingDirectory=/home/tpakhoa/.config/kanata-keyboard
+ExecStart=kanata --cfg ./config.kbd --quiet --nodelay
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
