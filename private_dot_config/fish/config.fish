@@ -12,13 +12,13 @@ end
 
 if status is-interactive
 	set fish_greeting
-	bind -M insert \e\[9\;5u accept-autosuggestion
-	bind -M default \e\[9\;5u accept-autosuggestion
-	bind -M paste \e\[9\;5u accept-autosuggestion
-	bind -M visual \e\[9\;5u accept-autosuggestion
-	bind -M replace \e\[9\;5u accept-autosuggestion
-	bind -M replace_one \e\[9\;5u accept-autosuggestion
-	bind -M insert \cU undo
+	bind -M insert ctrl-tab accept-autosuggestion
+	bind -M default ctrl-tab accept-autosuggestion
+	bind -M paste ctrl-tab accept-autosuggestion
+	bind -M visual ctrl-tab accept-autosuggestion
+	bind -M replace ctrl-tab accept-autosuggestion
+	bind -M replace_one ctrl-tab accept-autosuggestion
+	bind -M insert ctrl-u undo
 
 	set fish_vi_force_cursor 1
 	# Emulates vim's cursor shape behavior
@@ -36,12 +36,12 @@ if status is-interactive
 	# visual mode, but due to fish_cursor_default, is redundant here
 	set fish_cursor_visual block
 
-	bind -M insert \ei backward-char forward-char
-	bind -M default -m insert \ei end-of-line repaint-mode
-	bind -M replace_one -m default \ei cancel repaint-mode
-	bind -M replace -m default \ei cancel repaint-mode
-	bind -M visual -m default \ei end-selection repaint-mode
-	bind -M insert \e\b kill-whole-line
+	bind -M insert alt-i backward-char forward-char
+	bind -M default -m insert alt-i end-of-line repaint-mode
+	bind -M replace_one -m default alt-i cancel repaint-mode
+	bind -M replace -m default alt-i cancel repaint-mode
+	bind -M visual -m default alt-i end-selection repaint-mode
+	bind -M insert ctrl-backspace backward-kill-word
 
 	set fzf_fd_opts --unrestricted
 
@@ -52,19 +52,24 @@ end
 
 source "$HOME/.cargo/env.fish"
 
+# pyenv
+set -gx PYENV_ROOT "$HOME/.pyenv"
+set -gxp PATH "$PYENV_ROOT/bin"
+pyenv init - fish | source
+# pyenv end
+
 # bun
 set -gx BUN_INSTALL "$HOME/.bun"
 set -gxp PATH $BUN_INSTALL/bin
+# bun end
 
 # pnpm
-set -gx PNPM_HOME "/home/brian/.local/share/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+set -gxp PATH "$PNPM_HOME" $PATH
 # pnpm end
 
 # texlive
-set -gxp MANPATH /home/brian/.local/texlive/2025/texmf-dist/doc/man
-set -gxp INFOPATH /home/brian/.local/texlive/2025/texmf-dist/doc/info
-set -gxp PATH /home/brian/.local/texlive/2025/bin/x86_64-linux
+set -gxp MANPATH "$HOME/.local/texlive/2025/texmf-dist/doc/man"
+set -gxp INFOPATH "$HOME/.local/texlive/2025/texmf-dist/doc/info"
+set -gxp PATH "$HOME/.local/texlive/2025/bin/x86_64-linux"
 # texlive end

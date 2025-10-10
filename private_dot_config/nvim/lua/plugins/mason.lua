@@ -1,6 +1,8 @@
 return {
 	"mason-org/mason.nvim",
-	opts = {},
+	opts = {
+		log_level = vim.log.levels.DEBUG,
+	},
 	keys = {
 		{
 			"<leader>pm",
