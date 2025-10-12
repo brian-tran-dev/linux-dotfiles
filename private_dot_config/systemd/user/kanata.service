@@ -1,8 +1,7 @@
 [Unit]
 Description=Kanata Service
-Wants=dev-input-by\x2dpath-platform-i8042-serio0-event-kbd.device
-After=dev-input-by\x2dpath-platform-i8042-serio0-event-kbd.device
-Before=multi-user.target
+After=graphical-session.target
+PartOf=graphical-session.target
 
 [Service]
 ExecStartPre=/usr/sbin/modprobe uinput
@@ -13,4 +12,4 @@ Restart=on-failure
 RestartSec=30
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=graphical-session.target
