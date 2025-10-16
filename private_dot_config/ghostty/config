@@ -1,21 +1,26 @@
 font-family = "JetBrains Mono"
 theme = "Monokai Pro"
 window-theme = "ghostty"
+font-size = 13
 
-window-padding-y = 0
 window-show-tab-bar = "always"
 gtk-wide-tabs = false
 mouse-hide-while-typing = true
 title = "Unamed"
+gtk-toolbar-style = "flat"
 
-adjust-cursor-thickness = 300%
-adjust-cell-height = 40%
+adjust-cursor-thickness = 200%
+adjust-cell-height = 42%
 
 cursor-invert-fg-bg = true
 cursor-opacity = 0.8
 cursor-color = #FFFFFF
 cursor-text = #000000
 
+unfocused-split-opacity = 0.5
+unfocused-split-fill = #000000
+split-divider-color = #A7F3D0
+
 window-save-state = always
 
-config-file=keybindings
+config-file = keybindings

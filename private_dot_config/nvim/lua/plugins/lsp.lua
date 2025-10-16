@@ -40,19 +40,6 @@ return {
 	},
 
 	{
-		"brian-tran-dev/nvim-pretty_hover",
-		opts = {
-			max_height = 10,
-			border = "rounded",
-		},
-		config = function(_, opts)
-			local hover = require("pretty_hover")
-			hover.setup(opts)
-			vim.keymap.set("n", "<leader>sd", hover.hover, { desc = "Show docs" })
-		end,
-	},
-
-	{
 		"saghen/blink.compat",
 		version = "*",
 		lazy = true,
@@ -115,6 +102,7 @@ return {
 				["<C-c>"] = { "cancel", "hide_signature", "fallback" },
 				["<Tab>"] = { "select_and_accept", "fallback" },
 				["<Cr>"] = { "accept", "fallback" },
+				["<leader>sd"] = { "show_signature", "fallback" },
 			},
 
 			appearance = {
@@ -346,5 +334,19 @@ return {
 				desc = "List code actions",
 			},
 		},
+	},
+
+
+	{
+		"brian-tran-dev/nvim-pretty_hover",
+		opts = {
+			max_height = 10,
+			border = "rounded",
+		},
+		config = function(_, opts)
+			local hover = require("pretty_hover")
+			hover.setup(opts)
+			vim.keymap.set("n", "<leader>sd", hover.hover, { desc = "Show docs" })
+		end,
 	},
 }

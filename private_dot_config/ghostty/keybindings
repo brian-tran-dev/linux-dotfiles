@@ -4,15 +4,19 @@ keybind = clear
 keybind = ctrl+b>ctrl+n=new_tab
 keybind = ctrl+b>ctrl+i=previous_tab
 keybind = ctrl+b>ctrl+o=next_tab
-keybind = ctrl+b>shift+i=move_tab:-1
-keybind = ctrl+b>shift+o=move_tab:1
+keybind = ctrl+b>ctrl+b>ctrl+i=move_tab:-1
+keybind = ctrl+b>ctrl+b>ctrl+o=move_tab:1
 keybind = ctrl+b>tab=toggle_tab_overview
 keybind = ctrl+b>ctrl+u=prompt_surface_title
 
 keybind = ctrl+b>1=goto_tab:1
+keybind = ctrl+b>ctrl+1=goto_tab:1
 keybind = ctrl+b>2=goto_tab:2
+keybind = ctrl+b>ctrl+2=goto_tab:2
 keybind = ctrl+b>3=goto_tab:3
+keybind = ctrl+b>ctrl+3=goto_tab:3
 keybind = ctrl+b>4=goto_tab:4
+keybind = ctrl+b>ctrl+4=goto_tab:4
 keybind = ctrl+b>5=goto_tab:5
 keybind = ctrl+b>6=goto_tab:6
 keybind = ctrl+b>7=goto_tab:7
@@ -23,10 +27,10 @@ keybind = ctrl+b>ctrl+w=close_tab:this
 
 # ========= SPLIT ========================
 keybind = ctrl+b>ctrl+d=close_surface
-keybind = ctrl+b>alt+h=new_split:left
-keybind = ctrl+b>alt+l=new_split:right
-keybind = ctrl+b>alt+k=new_split:up
-keybind = ctrl+b>alt+j=new_split:down
+keybind = ctrl+b>ctrl+b>ctrl+h=new_split:left
+keybind = ctrl+b>ctrl+b>ctrl+l=new_split:right
+keybind = ctrl+b>ctrl+b>ctrl+k=new_split:up
+keybind = ctrl+b>ctrl+b>ctrl+j=new_split:down
 
 keybind = ctrl+b>shift+h=resize_split:left,30
 keybind = ctrl+b>shift+l=resize_split:right,30
@@ -48,12 +52,14 @@ keybind = alt+j=scroll_page_lines:1
 # ========== OTHERS ==========================
 keybind = ctrl+shift+v=paste_from_clipboard
 keybind = ctrl+shift+c=copy_to_clipboard
-keybind = ctrl+==increase_font_size:1
-keybind = ctrl+-=decrease_font_size:1
+keybind = ctrl+==increase_font_size:2.1
+keybind = ctrl+-=decrease_font_size:2.1
 keybind = ctrl+0=reset_font_size
 keybind = f11=toggle_fullscreen
 
 keybind = ctrl+b>p=toggle_command_palette
+keybind = ctrl+b>ctrl+p=toggle_command_palette
 keybind = ctrl+b>ctrl+z=undo
 keybind = ctrl+b>ctrl+r=redo
+keybind = ctrl+b>ctrl+b>r=reload_config
 
