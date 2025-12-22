@@ -54,22 +54,23 @@ source "$HOME/.cargo/env.fish"
 
 # pyenv
 set -gx PYENV_ROOT "$HOME/.pyenv"
-set -gxp PATH "$PYENV_ROOT/bin"
+# set -gxp PATH "$PYENV_ROOT/bin"
+fish_add_path -pP "$PYENV_ROOT/bin"
 pyenv init - fish | source
 # pyenv end
 
 # bun
 set -gx BUN_INSTALL "$HOME/.bun"
-set -gxp PATH $BUN_INSTALL/bin
+fish_add_path -pP $BUN_INSTALL/bin
 # bun end
 
 # pnpm
 set -gx PNPM_HOME "$HOME/.local/share/pnpm"
-set -gxp PATH "$PNPM_HOME" $PATH
+fish_add_path -pP "$PNPM_HOME"
 # pnpm end
 
 # texlive
 set -gxp MANPATH "$HOME/.local/texlive/2025/texmf-dist/doc/man"
 set -gxp INFOPATH "$HOME/.local/texlive/2025/texmf-dist/doc/info"
-set -gxp PATH "$HOME/.local/texlive/2025/bin/x86_64-linux"
+fish_add_path -pP "$HOME/.local/texlive/2025/bin/x86_64-linux"
 # texlive end
