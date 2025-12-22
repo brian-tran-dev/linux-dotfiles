@@ -101,8 +101,8 @@ return {
 				["<Esc>"] = { "hide_documentation", "hide", "hide_signature", "fallback" },
 				["<C-c>"] = { "cancel", "hide_signature", "fallback" },
 				["<Tab>"] = { "select_and_accept", "fallback" },
+				["<End>"] = { "select_and_accept", "fallback" },
 				["<Cr>"] = { "accept", "fallback" },
-				["<leader>sd"] = { "show_signature", "fallback" },
 			},
 
 			appearance = {

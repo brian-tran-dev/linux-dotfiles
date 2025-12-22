@@ -5,20 +5,21 @@ return {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = { "eslint_d", "biome-format", "prettier" },
-				javascriptreact = { "eslint_d", "biome-format", "prettier" },
-				typescript = { "eslint_d", "biome-format", "prettier" },
-				typescriptreact = { "eslint_d", "biome-format", "prettier" },
-				tsx = { "eslint_d", "biome-format", "prettier" },
-				jsx = { "eslint_d", "biome-format", "prettier" },
+				javascript = { "eslint_d", "prettier" },
+				javascriptreact = { "eslint_d", "prettier" },
+				typescript = { "eslint_d", "prettier" },
+				typescriptreact = { "eslint_d", "prettier" },
+				tsx = { "eslint_d", "prettier" },
+				jsx = { "eslint_d", "prettier" },
 				html = { "prettier" },
-				css = { "biome-format" },
+				css = { "prettier"  },
 				scss = { "prettier" },
 				json = { "prettier" },
 				jsonc = { "biome-format" },
 				yaml = { "prettier" },
 				markdown = { "prettier" },
-				toml = { "taplo" }
+				toml = { "taplo" },
+				typst = { "typstyle" }
 			},
 			format_on_save = function() end,
 		},
@@ -27,7 +28,7 @@ return {
 			{
 				"<leader>rf",
 				function()
-					require("conform").format({ stop_after_first = true })
+					require("conform").format({ async = true })
 				end,
 				mode = { "n", "v" },
 				desc = "Reformat",
@@ -56,6 +57,14 @@ return {
 					"biome.json",
 					"biome.jsonc",
 				}),
+			}
+
+
+			conform.formatters["typstyle"] = {
+				prepend_args = {
+					"-t", "4",
+					"-l", "120",
+				}
 			}
 		end
 	},

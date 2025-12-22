@@ -34,12 +34,23 @@ vim.filetype.add({
 	},
 })
 
+-- Set transparency for the main text
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" }) -- Floating windows
+-- Optional: Remove backgrounds from side columns to avoid "blocks"
+vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" }) -- The ~ symbols at the end
+
 ------------------------------------------------------
 ----------------- KEY MAPS ----------------------------
 -------------------------------------------------------
 
 --------- Miscalaneous ------------------------------
 vim.keymap.set("i", "jj", "<ESC>", { noremap = true, desc = "<Escape>" })
+vim.keymap.set({ "i", "c" }, "<C-BS>", "<C-w>", { noremap = true, desc = "Delete word backward in insert mode" })
+vim.keymap.set({ "i", "c" }, "<C-Left>", "<S-Left>", { noremap = true, desc = "Delete word backward in insert mode" })
+vim.keymap.set({ "i", "c" }, "<C-Right>", "<S-Right>", { noremap = true, desc = "Delete word backward in insert mode" })
 vim.keymap.set("n", "<BS>", ":noh<Enter>", { noremap = true, desc = "Remove Highlighting" })
 vim.keymap.set("c", "<Esc>", "<c-c>", { noremap = true, desc = "Cancel command line" })
 vim.keymap.set("n", "<leader>ww", "<Cmd>w<CR>", { noremap = true, desc = "Save" })

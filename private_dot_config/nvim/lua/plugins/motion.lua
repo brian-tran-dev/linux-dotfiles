@@ -2,9 +2,20 @@ return {
 	{
 		"ggandor/leap.nvim",
 		dependencies = { "tpope/vim-repeat" },
-		config = function()
-			require("leap").set_default_mappings()
-		end,
+		keys = {
+			{
+				"s",
+				"<Plug>(leap)",
+				mode = {'n', 'x', 'o'},
+				desc = "Leap current window",
+			},
+			{
+				"S",
+				"<Plug>(leap-from-window)",
+				mode = 'n',
+				desc = "Leap current window",
+			},
+		},
 	},
 	{
 		"kylechui/nvim-surround",
