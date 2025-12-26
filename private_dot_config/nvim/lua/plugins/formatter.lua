@@ -12,14 +12,14 @@ return {
 				tsx = { "eslint_d", "prettier" },
 				jsx = { "eslint_d", "prettier" },
 				html = { "prettier" },
-				css = { "prettier"  },
+				css = { "prettier" },
 				scss = { "prettier" },
 				json = { "prettier" },
 				jsonc = { "biome-format" },
 				yaml = { "prettier" },
 				markdown = { "prettier" },
 				toml = { "taplo" },
-				typst = { "typstyle" }
+				typst = { "typstyle" },
 			},
 			format_on_save = function() end,
 		},
@@ -28,16 +28,30 @@ return {
 			{
 				"<leader>rf",
 				function()
-					require("conform").format({ async = true })
+					require("conform").format({
+						async = true,
+						lsp_fallback = true,
+					}, function(err, did_edit)
+						if err then
+							vim.notify("Fail to format", vim.log.levels.ERROR)
+							return
+						end
+
+						if did_edit then
+							vim.notify("Formatted!", vim.log.levels.INFO)
+						else
+							vim.notify("Formatted! no changes", vim.log.levels.INFO)
+						end
+					end)
 				end,
 				mode = { "n", "v" },
 				desc = "Reformat",
 			},
 		},
 
-		config = function (_, opts)
-			local conform = require('conform')
-			local util = require('conform.util')
+		config = function(_, opts)
+			local conform = require("conform")
+			local util = require("conform.util")
 
 			conform.setup(opts)
 
@@ -59,16 +73,16 @@ return {
 				}),
 			}
 
-
 			conform.formatters["typstyle"] = {
 				prepend_args = {
-					"-t", "4",
-					"-l", "120",
-				}
+					"-t",
+					"4",
+					"-l",
+					"120",
+				},
 			}
-		end
+		end,
 	},
-
 
 	{
 		"zapling/mason-conform.nvim",
