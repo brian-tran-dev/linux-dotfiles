@@ -34,13 +34,17 @@ vim.filetype.add({
 	},
 })
 
--- Set transparency for the main text
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" }) -- Floating windows
--- Optional: Remove backgrounds from side columns to avoid "blocks"
-vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
-vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" }) -- The ~ symbols at the end
+
+
+if not vim.g.neovide then
+	-- Set transparency for the main text
+  vim.api.nvim_set_hl(0, "Normal",   { bg = "NONE", ctermbg = "NONE" })
+  vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE", ctermbg = "NONE" })
+	-- Optional: Remove backgrounds from side columns to avoid "blocks"
+	vim.api.nvim_set_hl(0, "LineNr", { bg = "none", ctermbg = "NONE"  })
+	vim.api.nvim_set_hl(0, "SignColumn", { bg = "none", ctermbg = "NONE"  })
+	vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none", ctermbg = "NONE"  }) -- The ~ symbols at the end
+end
 
 ------------------------------------------------------
 ----------------- KEY MAPS ----------------------------
