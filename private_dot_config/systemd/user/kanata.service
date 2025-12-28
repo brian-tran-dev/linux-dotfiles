@@ -5,9 +5,8 @@ PartOf=graphical-session.target
 
 [Service]
 ExecStartPre=/usr/sbin/modprobe uinput
-ExecSearchPath=/usr/local/bin/kanata
-WorkingDirectory=/home/tpakhoa/.config/kanata-keyboard
-ExecStart=kanata --cfg ./config.kbd --quiet --nodelay
+ExecSearchPath=/usr/local/bin
+ExecStart=kanata --cfg %h/.config/kanata-keyboard/config.kbd --quiet --nodelay
 Restart=on-failure
 RestartSec=30
 
