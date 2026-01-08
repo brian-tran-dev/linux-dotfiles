@@ -1,0 +1,34 @@
+[binds]
+<Ctrl+l> = next 1
+<Ctrl+h> = prev 1
+
+<Up> = pan 0 100
+<Down> = pan 0 -100
+<Left> = pan 100 0
+<Right> = pan -100 0
+
+<Ctrl+equal> = zoom 2
+<Ctrl+minus> = zoom -2
+<Ctrl+0> = zoom actual
+<Ctrl+f> = scaling full
+<Ctrl+w> = scaling full
+
+F11 = fullscreen
+f = fullscreen
+k = pan 0 100
+j = pan 0 -100
+h = pan 100 0
+l = pan -100 0
+c = center
+
+<Shift+R> = rotate 90
+<Shift+F> = flip horizontal
+<Ctrl+R> = reset
+
+<Ctrl+1> = goto 1
+<Ctrl+2> = goto 2
+<Ctrl+3> = goto 3
+<Ctrl+4> = goto 4
+<Ctrl+5> = goto 5
+
+<Space> = toggle_playing
