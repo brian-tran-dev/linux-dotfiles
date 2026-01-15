@@ -93,7 +93,11 @@ return {
 
 	{
 		"stevearc/aerial.nvim",
-		opts = {},
+		opts = {
+			layout = {
+				max_width = { 40, 0.2 },
+			},
+		},
 		-- Optional dependencies
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
@@ -142,7 +146,52 @@ return {
 						path = 1,
 						shorting_target = 40,
 					},
-					"aerial",
+					{
+						function()
+							local aerial = require("aerial")
+							local symbols = aerial.get_location(true)
+
+							-- 3. Return empty if no symbols found
+							local num_symbols = #symbols
+							if num_symbols == 0 then
+								return ""
+							end
+
+							-- 4. Define your separator
+							local sep = " › "
+
+							-- 5. Helper function to format a single symbol (icon + name)
+							local function format_item(s)
+								local kind = s.kind or ""
+								local icon = s.icon or ""
+								local name = s.name or ""
+
+								-- Construct the highlight group name (e.g., AerialFunctionIcon)
+								local hl_icon = "Aerial" .. kind .. "Icon"
+								-- Optional: Highlight the text too (e.g., AerialFunction)
+								local hl_text = "Aerial" .. kind
+
+								-- FORMATTING:
+								-- Icon gets specific color, text gets specific color (or remove hl_text to keep text white)
+								return string.format("%%#%s#%s%%* %%#%s#%s%%*", hl_icon, icon, hl_text, name)
+							end
+
+							-- 6. Apply your logic: First symbol + ... + Last 2
+							if num_symbols > 2 then
+								local first = format_item(symbols[1])
+								local last = format_item(symbols[num_symbols])
+
+								return first .. sep .. "…" .. sep .. last
+							else
+								-- If 3 or fewer, just show all of them joined by the separator
+								local parts = {}
+								for _, s in ipairs(symbols) do
+									table.insert(parts, format_item(s))
+								end
+								return table.concat(parts, sep)
+							end
+						end,
+					},
 				},
 
 				lualine_x = {},

@@ -1,4 +1,5 @@
 -- pencil mode
+vim.g['pencil#wrapModeDefault'] = 'soft'
 vim.keymap.set(
 	"n", "<leader>.tp",
 	function()

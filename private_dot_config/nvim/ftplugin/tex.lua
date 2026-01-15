@@ -1,4 +1,5 @@
 -- compile tex file
+vim.g['pencil#wrapModeDefault'] = 'soft'
 vim.keymap.set(
 	"n", "<leader>.c",
 	function()
