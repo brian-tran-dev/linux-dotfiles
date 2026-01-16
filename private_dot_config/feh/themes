@@ -1,0 +1,1 @@
+feh --auto-zoom --zoom-step 5 --fullscreen --scroll-step 100 --image-bg checks --auto-reload --draw-tinted --fontpath /home/tpakhoa/.local/share/fonts --font "JetBrainsMonoNL-Medium/32" --menu-font "JetBrainsMonoNL-Medium/32" --draw-filename --draw-actions

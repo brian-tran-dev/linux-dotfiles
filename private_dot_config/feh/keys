@@ -1,0 +1,31 @@
+toggle_fullscreen F11 f
+quit q
+
+jump_first n
+jump_last period
+
+next_img C-l
+prev_img C-h
+
+scroll_left Left h
+scroll_right Right l
+scroll_up Up k
+scroll_down Down j
+
+menu_parent Left h
+menu_child Right l
+menu_up Up k
+menu_down Down j
+menu_select Return space
+
+zoom_in i C-equal
+zoom_out o C-minus
+zoom_fit 0 C-0
+zoom_fill C-f
+
+flip V
+mirror H
+orient_1 C-r
+
+save_image C-s
+toggle_pause space

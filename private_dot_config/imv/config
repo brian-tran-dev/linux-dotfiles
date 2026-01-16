@@ -10,8 +10,10 @@
 <Ctrl+equal> = zoom 2
 <Ctrl+minus> = zoom -2
 <Ctrl+0> = zoom actual
-<Ctrl+f> = scaling full
-<Ctrl+w> = scaling full
+0 = scaling full
+<Ctrl+f> = scaling scrop
+i = zoom 2
+o = zoom -2
 
 F11 = fullscreen
 f = fullscreen
@@ -20,6 +22,7 @@ j = pan 0 -100
 h = pan 100 0
 l = pan -100 0
 c = center
+q = quit
 
 <Shift+R> = rotate 90
 <Shift+F> = flip horizontal
