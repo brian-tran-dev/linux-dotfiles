@@ -266,7 +266,7 @@ return {
 					bind = "<leader>gd",
 				},
 				hover = {
-					bind = "<leader>sd",
+					bind = "<leader>000",
 					wrap = true,
 					border = "rounded",
 					position = "cursor",
@@ -275,8 +275,7 @@ return {
 			documentation = {
 				auto_show = true,
 			},
-			style_sheets = {
-			},
+			style_sheets = {},
 		},
 	},
 
@@ -334,7 +333,6 @@ return {
 			},
 		},
 	},
-
 
 	{
 		"brian-tran-dev/nvim-pretty_hover",

@@ -21,9 +21,9 @@ return {
 				end,
 			},
 			float = {
-				padding = 2,
 				border = "rounded",
 				-- max_width = 30,
+				max_width = 0,
 				max_height = 10,
 				preview_split = "right",
 				override = function(conf)
@@ -31,7 +31,7 @@ return {
 						relative = "editor",
 						anchor = "SW",
 						row = 0,
-						col = 0,
+						col = 4,
 					})
 				end,
 			},
@@ -61,6 +61,7 @@ return {
 				["<leader>t."] = { "actions.toggle_hidden", mode = "n" },
 				["<leader>tt"] = { "actions.toggle_trash", mode = "n" },
 				["<leader>sp"] = { "actions.preview", opts = { split = "belowright", vertical = true } },
+				["<C-p>"] = { "actions.preview", opts = { split = "belowright", vertical = true } },
 			},
 		},
 		keys = {
@@ -75,7 +76,7 @@ return {
 			{
 				"<C-s>",
 				function()
-					require("oil").open_float(nil, { preview = { vertical = true, split = "aboveleft" } })
+					require("oil").open_float()
 				end,
 				mode = { "n", "v", "i" },
 				noremap = true,
