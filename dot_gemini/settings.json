@@ -1,0 +1,70 @@
+{
+	"security": {
+		"auth": {
+			"selectedType": "oauth-personal"
+		}
+	},
+	"general": {
+		"vimMode": false,
+		"sessionRetention": {
+			"enabled": true
+		},
+		"disableAutoUpdate": true
+	},
+	"theme": "ANSI",
+	"selectedAuthType": "oauth-personal",
+	"ui": {
+		"hideTips": false,
+		"showModelInfoInChat": true,
+		"footer": {
+			"hideSandboxStatus": true,
+			"hideContextPercentage": false,
+			"hideModelInfo": true
+		},
+		"hideBanner": true,
+		"showMemoryUsage": false,
+		"theme": "MonokaiPro",
+		"customThemes": {
+			"MonokaiPro": {
+				"name": "MonokaiPro",
+				"type": "custom",
+
+				"text": {
+					"primary": "#FCFCFA",
+					"secondary": "#db845b",
+					"link": "#78DCE8",
+					"accent": "#FFD866"
+				},
+				"background": {
+					"primary": "#2D2A2E",
+					"diff": {
+						"added": "#A9DC76",
+						"removed": "#FF6188"
+					}
+				},
+				"border": {
+					"default": "#a7f3d0",
+					"focused": "#78DCE8"
+				},
+				"ui": {
+					"comment": "#b6b3b6",
+					"symbol": "#AB9DF2",
+					"gradient": ["#78DCE8", "#AB9DF2", "#FF6188"]
+				},
+				"status": {
+					"error": "#FF6188",
+					"success": "#A9DC76",
+					"warning": "#FFD866"
+				}
+			}
+		}
+	},
+	"tools": {
+		"shell": {
+			"showColor": true
+		}
+	},
+	"output": {
+		"format": "text"
+	}
+}
