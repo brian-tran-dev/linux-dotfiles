@@ -31,7 +31,7 @@ return {
 						relative = "editor",
 						anchor = "SW",
 						row = 0,
-						col = 4,
+						col = 0,
 					})
 				end,
 			},

@@ -3,6 +3,7 @@
   "autoclose.nvim": { "branch": "main", "commit": "3f86702b54a861a17d7994b2e32a7c648cb12fb1" },
   "blink.cmp": { "branch": "main", "commit": "ceed1545929b74cf79b5a8950e7c415683bf690b" },
   "blink.compat": { "branch": "main", "commit": "2ed6d9a28b07fa6f3bface818470605f8896408c" },
+  "codecompanion.nvim": { "branch": "main", "commit": "ed4abfb1c328c1f4c50d6d26e6eb0ebf0ef1d2a0" },
   "conform.nvim": { "branch": "master", "commit": "5420c4b5ea0aeb99c09cfbd4fd0b70d257b44f25" },
   "csvview.nvim": { "branch": "main", "commit": "1f409951516db0d5babaa1f44842a9a882babdd3" },
   "dressing.nvim": { "branch": "master", "commit": "2d7c2db2507fa3c4956142ee607431ddb2828639" },

@@ -34,7 +34,7 @@ return {
 				"rust_analyzer",
 				"basedpyright",
 				"ruff",
-				"copilot",
+				-- "copilot",
 			},
 		},
 	},
