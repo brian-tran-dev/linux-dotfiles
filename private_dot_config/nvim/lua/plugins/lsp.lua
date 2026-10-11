@@ -15,6 +15,29 @@ return {
 					},
 				},
 			}
+
+			vim.lsp.config("tailwindcss", {
+				settings = {
+					tailwindCSS = {
+						classFunctions = { "cn", "cva", "clsx" },
+						experimental = {
+							classRegex = {
+								-- 1. Matches JSX/HTML attributes: classNameButton="bg-primary"
+								[[className\w*\s*=\s*\{?\s*["'`]([^"'`]+)["'`]\}?]],
+
+								-- 2. Matches Object properties: classNameA: "bg-primary"
+								[=[className\w*\s*:\s*["'`]([^"'`]+)["'`]]=],
+
+								-- Match whole classNames object content
+								{ "classNames\\s*=\\s*\\{\\{([\\s\\S]*?)\\}\\}", "[\"'`]([^\"'`]*)[\"'`]" },
+
+								-- Optional: non-JSX style (e.g. classNames: { ... })
+								{ "classNames\\s*:\\s*\\{([\\s\\S]*?)\\}", "[\"'`]([^\"'`]*)[\"'`]" },
+							},
+						},
+					},
+				},
+			})
 		end,
 	},
 	{
@@ -28,6 +51,8 @@ return {
 				"lua_ls",
 				"html",
 				"ts_ls",
+				"tailwindcss",
+				"eslint",
 				"cssls",
 				"emmet_ls",
 				"taplo",
@@ -55,9 +80,9 @@ return {
 		},
 
 		-- use a release tag to download pre-built binaries
-		-- version = '1.*',
-		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-		build = "rustup run nightly cargo build --release",
+		version = "1.*",
+		-- source build disabled to avoid nightly Rust breakages
+		-- build = "rustup run nightly cargo build --release",
 		-- If you use nix, you can build from source using latest nightly rust with:
 		-- build = 'nix run .#build-plugin',
 
@@ -187,11 +212,21 @@ return {
 					html = { "lsp", "html-css", "snippets", "path", "buffer" },
 					css = { "lsp", "html-css", "path", "snippets", "buffer" },
 					js = { "lsp", "buffer", "path", "html-css" },
+
+					-- add DB completion for SQL buffers
+					sql = { "snippets", "dadbod", "buffer" },
+					mysql = { "snippets", "dadbod", "buffer" },
+					plsql = { "snippets", "dadbod", "buffer" },
 				},
 				providers = {
 					["html-css"] = {
 						name = "html-css",
 						module = "blink.compat.source",
+					},
+
+					dadbod = {
+						name = "Dadbod",
+						module = "vim_dadbod_completion.blink",
 					},
 				},
 			},
@@ -316,12 +351,9 @@ return {
 		"rachartier/tiny-code-action.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"folke/snacks.nvim",
 		},
 		event = "LspAttach",
-		opts = {
-			picker = "snacks",
-		},
+		opts = {},
 		keys = {
 			{
 				"<leader>la",

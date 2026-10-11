@@ -1,9 +1,16 @@
-#browser #main .inner > .tabbar-wrapper {
+#browser .auto-hide-wrapper.has-mainbar {
+	transition-duration: 0!important;
+	animation-duration: 0!important;
+}
+
+#browser .auto-hide-wrapper.has-tabbar {
+	transition-duration: 0!important;
+	animation-duration: 0!important;
 	position: absolute;
-	left: calc(var(--my-side-width) + 1px + 14px);
-	transform: translateY(-50%);
-	top: 50%;
-	height: calc(100vh - 38px);
+	left: 0;
+	top: 0;
+	bottom: 0;
+	height: 100%;
 	z-index: 1;
 	background-color: #2f3038;
 	border-radius: 8px;
@@ -11,22 +18,17 @@
 	border: 2px solid #6b6d80;
 }
 
-#browser #main .inner > .tabbar-wrapper:empty {
+#browser .auto-hide-wrapper.has-tabbar .tabbar-wrapper {
+	transition-duration: 0;
+	animation-duration: 0;
+}
+
+#browser .auto-hide-wrapper.has-tabbar:has([role=tabpanel][aria-hidden=false]) .tabbar-wrapper {
 	display: none!important;
 }
 
-#browser.address-top-off:has(#titlebar) #main .inner > .tabbar-wrapper {
-	height: calc(100vh - 38px - 28px);
-}
-#browser:not(.address-top-off):has(#titlebar) #main .inner > .tabbar-wrapper {
-	height: calc(100vh - 38px - 69px);
-}
-#browser:not(.address-top-off, :has(#titlebar)) #main .inner > .tabbar-wrapper {
-	height: calc(100vh - 38px - 32px);
-}
-#browser.fullscreen #main .inner > .tabbar-wrapper {
-	top: 50%;
-	height: calc(100vh - 38px);
+#browser .auto-hide-wrapper.has-tabbar:empty {
+	display: none!important;
 }
 
 #browser #main #tabs-tabbar-container {
@@ -82,24 +84,24 @@
 	display: none;
 }
 
-#browser #main .tabbar-wrapper .tabbar-workspace-button {
+#browser #main .auto-hide-wrapper.has-tabbar .tabbar-workspace-button {
 	padding: 12px;
 }
-#browser #main .tabbar-wrapper .tabbar-workspace-button .ToolbarButton-Button {
+#browser #main .auto-hide-wrapper.has-tabbar .tabbar-workspace-button .ToolbarButton-Button {
 	padding: 0 6px;
 	background-color: #4a4c59;
 }
-#browser #main .tabbar-wrapper .tabbar-workspace-button .ToolbarButton-Button svg path {
+#browser .auto-hide-wrapper.has-tabbar .tabbar-workspace-button .ToolbarButton-Button svg path {
 	stroke-width: 1.5px;
 }
-#browser #main .tabbar-wrapper .tabbar-workspace-button .ToolbarButton-Button .button-title {
+#browser .auto-hide-wrapper.has-tabbar .tabbar-workspace-button .ToolbarButton-Button .button-title {
 	font-weight: bold;
 	font-size: 13px;
 }
-#browser #main .tabbar-wrapper .tabbar-workspace-button .ToolbarButton-Button:hover {
+#browser .auto-hide-wrapper.has-tabbar .tabbar-workspace-button .ToolbarButton-Button:hover {
 	color: #f6c177;
 	background-color: #4a4c59;
 }
-#browser #main .tabbar-wrapper .tabbar-workspace-button .ToolbarButton-Button.button-pressed {
+#browser .auto-hide-wrapper.has-tabbar .tabbar-workspace-button .ToolbarButton-Button.button-pressed {
 	border: 1px solid #f6c177;
 }

@@ -1,23 +1,20 @@
 #!/bin/bash
-STATE_FILE="$HOME/.gemini/nvim_session_state"
 
-# If the state file exists, it means a script was running.
-if [ -f "$STATE_FILE" ]; then
-    # Source the variables (SESSION_PID, SESSION_TMP_DIR) from the state file.
-    . "$STATE_FILE"
+PERSISTENT_SESSION_BASE_DIR="$HOME/.gemini/nvim-tmp"
+HOST_TMP_DIR="$HOME/.gemini/tmp"
 
-    # If the process ID exists and is a running process...
-    if [ -n "$SESSION_PID" ] && ps -p "$SESSION_PID" > /dev/null; then
-        # ...terminate it. This will trigger the script's own cleanup trap.
-        kill "$SESSION_PID"
-    fi
+# Ensure host_tmp_dir exists
+mkdir -p "$HOST_TMP_DIR"
 
-    # As a fallback, in case the script's trap fails, clean up the temp dir.
-    if [ -n "$SESSION_TMP_DIR" ] && [ -d "$SESSION_TMP_DIR" ]; then
-        rm -rf "$SESSION_TMP_DIR"
-		cp -a --update=none $SESSION_TMP_DIR $HOST_TEMP_DIR
-    fi
-
-    # Remove the state file to signify that cleanup is complete.
-    rm -f "$STATE_FILE"
+# Check if the persistent base directory exists
+if [ -d "$PERSISTENT_SESSION_BASE_DIR" ]; then
+    # Iterate over each subdirectory in the persistent base directory
+    # The trailing slash ensures that only directories are matched by glob.
+    for SESSION_TMP_DIR in "$PERSISTENT_SESSION_BASE_DIR"/*/; do
+        # Check if SESSION_TMP_DIR is a valid directory
+        if [ -d "$SESSION_TMP_DIR" ]; then
+            echo "Copying contents of $SESSION_TMP_DIR to $HOST_TMP_DIR"
+            cp -a --update=none "$SESSION_TMP_DIR/." "$HOST_TMP_DIR/"
+        fi
+    done
 fi

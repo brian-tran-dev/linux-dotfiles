@@ -2,12 +2,13 @@
 if test -z "$(fisher list nvm)"
 	fisher install jorgebucaran/nvm.fish
 	nvm install lts
-	set --universal nvm_default_version lts
+	set --global nvm_default_version lts
 end
 
 if test -z "$(nvm list)"
+	echo "Run nvm config"
 	nvm install lts
-	set --universal nvm_default_version lts
+	set --global nvm_default_version lts
 end
 
 if status is-interactive
@@ -48,6 +49,7 @@ if status is-interactive
 	starship init fish | source
 	fzf --fish | source
 	zoxide init fish | source
+	nvm use lts -s
 end
 
 source "$HOME/.cargo/env.fish"
@@ -64,6 +66,10 @@ set -gx BUN_INSTALL "$HOME/.bun"
 fish_add_path -pP $BUN_INSTALL/bin
 # bun end
 
+# yarn
+# yarn set version stable
+# yarn end
+
 # pnpm
 set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 fish_add_path -pP "$PNPM_HOME"
@@ -74,3 +80,10 @@ set -gxp MANPATH "$HOME/.local/texlive/2025/texmf-dist/doc/man"
 set -gxp INFOPATH "$HOME/.local/texlive/2025/texmf-dist/doc/info"
 fish_add_path -pP "$HOME/.local/texlive/2025/bin/x86_64-linux"
 # texlive end
+
+set -gxp CODEX_AUTH_PER_PROJECT_ACCOUNTS 0
+# opencode end
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/home/tpakhoa/.local/bin" $PATH

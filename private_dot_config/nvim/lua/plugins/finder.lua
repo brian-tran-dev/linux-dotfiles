@@ -1,36 +1,5 @@
 return {
 	{
-		"mrjones2014/legendary.nvim",
-		priority = 900,
-		lazy = false,
-		dependencies = { "kkharji/sqlite.lua" },
-		opts = {
-			extensions = {
-				lazy_nvim = true,
-			},
-		},
-		keys = {
-			{
-				"<leader>pl",
-				function()
-					vim.cmd([[ Lazy ]])
-				end,
-				mode = "n",
-				noremap = true,
-				desc = "Lazy Panel",
-			},
-			{
-				"<C-p>",
-				function()
-					vim.cmd([[ Legendary ]])
-				end,
-				mode = { "n", "v" },
-				noremap = true,
-			},
-		},
-	},
-
-	{
 		"folke/snacks.nvim",
 		opts = {
 			picker = {
@@ -38,8 +7,10 @@ return {
 					-- input window
 					input = {
 						keys = {
-							["<C-c>"] = { "close", mode = {"i", "n"} },
+							["<C-c>"] = { "close", mode = { "i", "n" } },
 							["<C-l>"] = { "confirm", mode = { "n", "i" } },
+							["<M-j>"] = { "preview_scroll_down", mode = { "i", "n" } },
+							["<M-k>"] = { "preview_scroll_up", mode = { "i", "n" } },
 						},
 					},
 					list = {
@@ -76,11 +47,13 @@ return {
 			{
 				"<leader>lb",
 				function()
-					Snacks.picker.buffers({ win = {
-						input = {
-							keys = { ["<c-d>"] = { "bufdelete", mode = { "n", "i" } } },
-						}
-					}})
+					Snacks.picker.buffers({
+						win = {
+							input = {
+								keys = { ["<c-d>"] = { "bufdelete", mode = { "n", "i" } } },
+							},
+						},
+					})
 				end,
 				desc = "Buffers",
 			},
@@ -89,6 +62,7 @@ return {
 				function()
 					Snacks.picker.buffers({
 						current = false,
+						sort_lastused = true,
 						win = {
 							input = {
 								keys = { ["<c-d>"] = { "bufdelete", mode = { "n", "i" } } },
@@ -96,7 +70,7 @@ return {
 						},
 					})
 				end,
-				mode = {'n', 'i', 'v'},
+				mode = { "n", "i", "v" },
 				desc = "Buffers",
 			},
 			{
@@ -214,7 +188,6 @@ return {
 				end,
 				desc = "Type Definition",
 			},
-
 		},
 	},
 }

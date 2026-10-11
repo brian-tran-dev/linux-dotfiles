@@ -15,4 +15,5 @@ if vim.g.neovide then
 	vim.keymap.set({ "n", "v" }, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>")
 
 	vim.g.neovide_fullscreen = true
+	vim.g.neovide_input_ime = true
 end

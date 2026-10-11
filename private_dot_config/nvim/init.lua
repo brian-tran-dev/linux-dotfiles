@@ -20,11 +20,13 @@ opt.scrolloff = 0
 opt.smoothscroll = true
 opt.display = "lastline"
 opt.guicursor = "a:block,n-i-r-cr-i-ci:blinkwait500-blinkon500-blinkoff500,r-cr:hor30,i-ci-ve:ver50"
-opt.cmdheight = 1
+opt.cmdheight = 0
 
 api.nvim_set_hl(0, "NormalFloat", { bg = "#403b42" })
 api.nvim_set_hl(0, "FloatBorder", { bg = "#403b42", fg = "#6b6d80" })
 api.nvim_set_hl(0, "FloatTitle", { bg = "#403b42", fg = "#a7f3d0" })
+api.nvim_set_hl(0, "HelpNormal", { bg = "#29262a" })
+api.nvim_set_hl(0, "HelpBorder", { fg = "#8a8399", bg = "#29262a" })
 api.nvim_set_hl(0, "LineNr", { fg = "#9390a6" })
 api.nvim_set_hl(0, "CursorLineNr", { fg = "white" })
 
@@ -34,16 +36,14 @@ vim.filetype.add({
 	},
 })
 
-
-
 if not vim.g.neovide then
 	-- Set transparency for the main text
-  vim.api.nvim_set_hl(0, "Normal",   { bg = "NONE", ctermbg = "NONE" })
-  vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE", ctermbg = "NONE" })
+	vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
+	vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE", ctermbg = "NONE" })
 	-- Optional: Remove backgrounds from side columns to avoid "blocks"
-	vim.api.nvim_set_hl(0, "LineNr", { bg = "none", ctermbg = "NONE"  })
-	vim.api.nvim_set_hl(0, "SignColumn", { bg = "none", ctermbg = "NONE"  })
-	vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none", ctermbg = "NONE"  }) -- The ~ symbols at the end
+	vim.api.nvim_set_hl(0, "LineNr", { bg = "none", ctermbg = "NONE" })
+	vim.api.nvim_set_hl(0, "SignColumn", { bg = "none", ctermbg = "NONE" })
+	vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none", ctermbg = "NONE" }) -- The ~ symbols at the end
 end
 
 ------------------------------------------------------
@@ -72,11 +72,14 @@ vim.keymap.set("n", "<leader>gl", function()
 end, { noremap = true, desc = "Goto  Link/File" })
 
 local bufs_with_exit_shortcuts = {}
-api.nvim_create_autocmd("BufEnter", {
+api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
 	pattern = "*",
 	callback = function(args)
 		local buf = args.buf
-		if not vim.bo[buf].modifiable and bufs_with_exit_shortcuts[buf] == nil then
+		if
+			(not vim.bo[buf].modifiable or vim.bo[buf].filetype == "checkhealth")
+			and bufs_with_exit_shortcuts[buf] == nil
+		then
 			bufs_with_exit_shortcuts[buf] = true
 			vim.keymap.set({ "n", "v" }, "q", function()
 				api.nvim_buf_delete(buf, { force = true })
@@ -93,6 +96,13 @@ api.nvim_create_autocmd({ "BufDelete", "BufUnload", "BufHidden" }, {
 		if bufs_with_exit_shortcuts[args.buf] then
 			bufs_with_exit_shortcuts[args.buf] = nil
 		end
+	end,
+})
+
+api.nvim_create_autocmd("FileType", {
+	pattern = "help",
+	callback = function()
+		vim.wo.winhighlight = "Normal:HelpNormal,NormalNC:HelpNormal,EndOfBuffer:HelpNormal,WinSeparator:HelpBorder"
 	end,
 })
 --------------------------------------------------

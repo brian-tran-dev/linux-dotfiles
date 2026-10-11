@@ -9,6 +9,7 @@ return {
 				javascriptreact = { "eslint_d", "prettier" },
 				typescript = { "eslint_d", "prettier" },
 				typescriptreact = { "eslint_d", "prettier" },
+				ts = { "eslint_d", "prettier" },
 				tsx = { "eslint_d", "prettier" },
 				jsx = { "eslint_d", "prettier" },
 				html = { "prettier" },

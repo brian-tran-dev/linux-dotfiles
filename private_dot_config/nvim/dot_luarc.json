@@ -5,7 +5,7 @@
 	},
 	"workspace": {
 		"library": [
-			"/usr/local/stow/nvim-0.11.4/share/nvim/runtime/",
+			"/usr/local/share/nvim/runtime/",
 			"/home/tpakhoa/.local/share/nvim/lazy/"
 		]
 	}

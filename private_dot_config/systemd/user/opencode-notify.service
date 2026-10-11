@@ -1,0 +1,17 @@
+[Unit]
+Description=OpenCode desktop notifications and scoped Herdr bridge
+After=graphical-session.target
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/python3 %h/.config/opencode/helpers/notify.py --serve
+Restart=on-failure
+RestartSec=2
+RuntimeDirectory=opencode-notify
+RuntimeDirectoryMode=0700
+RuntimeDirectoryPreserve=yes
+UMask=0077
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=default.target

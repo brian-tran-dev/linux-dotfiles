@@ -31,9 +31,9 @@
 
 				"text": {
 					"primary": "#FCFCFA",
-					"secondary": "#db845b",
+					"secondary": "#FF8C00",
 					"link": "#78DCE8",
-					"accent": "#FFD866"
+					"accent": "#FFFF00"
 				},
 				"background": {
 					"primary": "#2D2A2E",
@@ -43,18 +43,18 @@
 					}
 				},
 				"border": {
-					"default": "#a7f3d0",
+					"default": "#807c82",
 					"focused": "#78DCE8"
 				},
 				"ui": {
-					"comment": "#b6b3b6",
+					"comment": "#B6B3B6",
 					"symbol": "#AB9DF2",
 					"gradient": ["#78DCE8", "#AB9DF2", "#FF6188"]
 				},
 				"status": {
 					"error": "#FF6188",
 					"success": "#A9DC76",
-					"warning": "#FFD866"
+					"warning": "#ffff00"
 				}
 			}
 		}

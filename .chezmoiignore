@@ -1,1 +1,14 @@
 key.txt.age
+
+# Credentials and generated state must never be restored as portable settings.
+.config/chezmoi/key.txt
+.config/chezmoi/chezmoistate.boltdb
+.config/opencode/service.json
+.config/herdr/*.log*
+.config/herdr/*.sock*
+.config/herdr/.plugins.lock
+.config/herdr/session.json
+.config/herdr/session-snapshots/**
+.config/herdr/sessions/**
+.config/nvim/noice.log
+**/__pycache__/**

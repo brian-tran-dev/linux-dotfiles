@@ -1,0 +1,11 @@
+ARG BASE_IMAGE=localhost/opencode-dev:brian-personal
+FROM ${BASE_IMAGE}
+
+# Preserve the existing development image and add the same Neovim release as
+# the host. The installer verifies the pinned upstream archive's SHA-256.
+USER root
+COPY install-neovim.py /tmp/install-neovim.py
+RUN python3 /tmp/install-neovim.py
+ENV PATH="/opt/neovim/bin:${PATH}" \
+    EDITOR=nvim \
+    VISUAL=nvim

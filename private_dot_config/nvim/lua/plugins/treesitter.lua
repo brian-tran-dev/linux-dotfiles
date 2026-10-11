@@ -37,7 +37,7 @@ return {
 				"http",
 				"java",
 				"json",
-				"jsonc",
+				-- "jsonc",
 				"jsdoc",
 				-- "python",
 				"regex",

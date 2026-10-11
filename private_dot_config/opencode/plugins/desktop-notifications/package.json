@@ -1,0 +1,8 @@
+{
+  "name": "local-opencode-desktop-notifications",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./tui": "./tui.ts"
+  }
+}
