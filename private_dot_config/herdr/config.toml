@@ -4,10 +4,28 @@ onboarding = false
 name = "terminal"
 auto_switch = false
 
-# Follow the terminal palette, with clear tmux-like focused pane borders.
+# Monokai Pro / tmux high-contrast UI. Pane applications retain Kitty's palette.
 [theme.custom]
 accent = "#A7F3D0"
-overlay0 = "#868686"
+zoom_border = "#A5B4FC"
+panel_bg = "#3c3a3c"
+sidebar_bg = "#211f22"
+active_row_bg = "#45404b"
+selection_bg = "#514859"
+surface0 = "#3c3a3c"
+surface1 = "#514859"
+surface_dim = "#29262b"
+text = "#fcfcfa"
+subtext0 = "#dad5df"
+overlay0 = "#c4bdcc"
+overlay1 = "#ece9ef"
+mauve = "#c4b5fd"
+green = "#a9dc76"
+yellow = "#ffd866"
+red = "#ff6188"
+blue = "#ab9df2"
+teal = "#78dce8"
+peach = "#fc9867"
 
 [terminal]
 new_cwd = "follow"
@@ -17,12 +35,20 @@ prefix = "ctrl+b"
 detach = ["prefix+q", "prefix+ctrl+q"]
 new_tab = ["prefix+n", "prefix+ctrl+n"]
 close_tab = ["prefix+w", "prefix+ctrl+w"]
-rename_tab = ["prefix+u", "prefix+ctrl+u"]
+close_pane = ""
+close_workspace = "prefix+x"
+rename_tab = "prefix+ctrl+u"
+rename_workspace = "prefix+shift+u"
+rename_pane = "prefix+u"
 previous_tab = ["prefix+i", "prefix+ctrl+i"]
 next_tab = ["prefix+o", "prefix+ctrl+o"]
 switch_tab = ["prefix+1..9", "prefix+ctrl+1..9"]
-move_tab_previous = ["prefix+shift+i", "prefix+ctrl+shift+i"]
-move_tab_next = ["prefix+shift+o", "prefix+ctrl+shift+o"]
+switch_workspace = "prefix+shift+1..9"
+move_tab_previous = "prefix+shift+i"
+move_tab_next = "prefix+shift+o"
+focus_agent = "prefix+alt+1..9"
+next_agent = "prefix+alt+j"
+previous_agent = "prefix+alt+k"
 focus_pane_left = ["prefix+h", "prefix+ctrl+h"]
 focus_pane_down = ["prefix+j", "prefix+ctrl+j"]
 focus_pane_up = ["prefix+k", "prefix+ctrl+k"]
@@ -30,7 +56,8 @@ focus_pane_right = ["prefix+l", "prefix+ctrl+l"]
 zoom = "prefix+f"
 copy_mode = "prefix+["
 workspace_picker = ["prefix+s", "prefix+ctrl+s"]
-settings = "prefix+alt+s"
+toggle_sidebar = "prefix+m"
+settings = "prefix+ctrl+alt+s"
 open_notification_target = "prefix+alt+o"
 # Ctrl+B, r enters a repeatable h/j/k/l resize mode; Escape exits.
 resize_mode = "prefix+r"
@@ -42,21 +69,22 @@ swap_pane_left = "prefix+ctrl+alt+h"
 swap_pane_down = "prefix+ctrl+alt+j"
 swap_pane_up = "prefix+ctrl+alt+k"
 swap_pane_right = "prefix+ctrl+alt+l"
-# Alt replaces tmux's second-prefix control table for directional splits.
-split_vertical = "prefix+alt+l"
-split_horizontal = "prefix+alt+j"
-# Avoid the legacy Ctrl+I/Tab ambiguity with previous_tab.
+# Arrow keys create a pane in the requested direction after the prefix.
+split_vertical = "prefix+right"
+split_horizontal = "prefix+down"
+# Use directional navigation only; leave pane cycling and back-and-forth unbound.
 cycle_pane_next = ""
-cycle_pane_previous = "prefix+shift+tab"
+cycle_pane_previous = ""
+last_pane = ""
 
 [[keys.command]]
-key = "prefix+alt+h"
+key = "prefix+left"
 type = "shell"
 command = 'python3 "$HOME/.config/herdr/split-pane.py" left'
 description = "split pane to the left"
 
 [[keys.command]]
-key = "prefix+alt+k"
+key = "prefix+up"
 type = "shell"
 command = 'python3 "$HOME/.config/herdr/split-pane.py" up'
 description = "split pane above"
@@ -64,7 +92,8 @@ description = "split pane above"
 [ui]
 prompt_new_tab_name = false
 tab_bar_position = "top"
-pane_outer_borders = false
+pane_borders = "always"
+pane_outer_borders = true
 pane_gaps = false
 pane_scrollbars = false
 tab_bar_right = [
@@ -73,6 +102,19 @@ tab_bar_right = [
     { type = "command", command = 'python3 "$HOME/.config/herdr/battery-status.py"', interval_seconds = 15, timeout_seconds = 2 },
 ]
 tab_bar_right_separator = " "
+
+# Keep the default sidebar content, but do not dim its labels and paths.
+[ui.sidebar.agents]
+rows = [
+    ["state_icon", { token = "machine", dim = false }, { token = "workspace", dim = false }, { token = "tab", dim = false }],
+    [{ token = "agent", dim = false }],
+]
+
+[ui.sidebar.spaces]
+rows = [
+    ["state_icon", { token = "workspace", bold = true, dim = false }],
+    [{ token = "branch", dim = false }, { token = "git_status", dim = false }],
+]
 
 # The OpenCode desktop plugin handles foreground/background notifications and
 # distinguishes real errors from permission/question requests. Avoid duplicates.

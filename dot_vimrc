@@ -1,0 +1,26 @@
+set number
+
+" Use literal tab characters, displayed and indented as four columns.
+set noexpandtab
+set tabstop=4
+set shiftwidth=4
+set autoindent
+
+" Use Space as the leader key for custom Normal-mode commands.
+let mapleader = ' '
+nnoremap <leader>ww :w<CR>
+nnoremap <leader>wq :wq<CR>
+nnoremap <leader>qq :q<CR>
+nnoremap <leader>qa :qa<CR>
+
+" Leave Insert mode by typing jj.
+set timeout
+set timeoutlen=5000
+inoremap jj <Esc>
+
+" Block cursor in Normal/Visual mode; vertical bar in Insert mode.
+" Requires a terminal that supports DECSCUSR cursor-shape sequences.
+if exists('&t_SI')
+  let &t_SI = "\<Esc>[6 q"
+  let &t_EI = "\<Esc>[2 q"
+endif

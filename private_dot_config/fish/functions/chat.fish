@@ -12,8 +12,16 @@ function chat
             "$HOME/.config/opencode" \
             "$HOME/.local/share/opencode" \
             "$HOME/.local/state/opencode" \
-            "$HOME/.cache/opencode"
-        set work_mount --mount "type=bind,src=$work_dir,dst=$work_dir"
+            "$HOME/.cache/opencode" \
+            "$HOME/.config/nvim" \
+            "$HOME/.local/share/nvim" \
+            "$HOME/.local/state/nvim" \
+            "$HOME/.cache/nvim" \
+            "$HOME/.pyenv/versions/3.13.11"
+        # Do not remount a read-only directory's descendants as writable.
+        if not string match --quiet -- "$HOME/.config/nvim/*" "$work_dir"; and not string match --quiet -- "$HOME/.pyenv/versions/3.13.11/*" "$work_dir"
+            set work_mount --mount "type=bind,src=$work_dir,dst=$work_dir"
+        end
     end
 
     set -l image localhost/opencode-dev:brian-personal-editor
@@ -58,7 +66,32 @@ function chat
         echo "Warning: desktop notification bridge is unavailable." >&2
     end
 
-    podman run \
+    # Import only the host-side X11 credentials; never pass them to Podman.
+    set -l clipboard_dir "$runtime_dir/opencode-clipboard"
+    if command -q systemctl
+        set -l display_vars
+        for variable in DISPLAY XAUTHORITY
+            if set -q $variable; and test -n "$$variable"
+                set -a display_vars $variable
+            end
+        end
+        if test (count $display_vars) -gt 0
+            systemctl --user import-environment $display_vars
+        end
+        if not systemctl --user start opencode-clipboard.service
+            echo "Unable to start the host clipboard bridge." >&2
+            return 1
+        end
+    end
+    if not test -S "$clipboard_dir/clipboard.sock"
+        echo "Clipboard bridge unavailable; reload/start opencode-clipboard.service." >&2
+        return 1
+    end
+    set -a context_args \
+        --mount "type=bind,src=$clipboard_dir,dst=$clipboard_dir,ro" \
+        --env "OPENCODE_CLIPBOARD_SOCKET=$clipboard_dir/clipboard.sock"
+
+	HERDR_AGENT=opencode podman run \
         --rm --interactive --tty \
         --env TERM=xterm-256color \
         --env "HOME=$HOME" \
@@ -69,6 +102,11 @@ function chat
         --mount type=bind,src="$HOME/.local/share/opencode",dst="$HOME/.local/share/opencode" \
         --mount type=bind,src="$HOME/.local/state/opencode",dst="$HOME/.local/state/opencode" \
         --mount type=bind,src="$HOME/.cache/opencode",dst="$HOME/.cache/opencode" \
+        --mount type=bind,src="$HOME/.config/nvim",dst="$HOME/.config/nvim",ro \
+        --mount type=bind,src="$HOME/.local/share/nvim",dst="$HOME/.local/share/nvim" \
+        --mount type=bind,src="$HOME/.local/state/nvim",dst="$HOME/.local/state/nvim" \
+        --mount type=bind,src="$HOME/.cache/nvim",dst="$HOME/.cache/nvim" \
+        --mount type=bind,src="$HOME/.pyenv/versions/3.13.11",dst="$HOME/.pyenv/versions/3.13.11",ro \
         --mount type=bind,src="$HOME/.ssh/config_container",dst="$HOME/.ssh/config",ro \
         --mount type=bind,src="$HOME/.ssh/github_ed25519",dst="$HOME/.ssh/github_ed25519",ro \
         --mount type=bind,src="$HOME/.ssh/aws_codecommit_rsa",dst="$HOME/.ssh/aws_codecommit_rsa",ro \

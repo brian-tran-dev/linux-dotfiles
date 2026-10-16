@@ -1,0 +1,8 @@
+[init]
+	defaultBranch = master
+[credentials]
+	helper = store
+[credential]
+	helper = store
+[push]
+	autoSetupRemote = true

@@ -7,8 +7,15 @@ key.txt.age
 .config/herdr/*.log*
 .config/herdr/*.sock*
 .config/herdr/.plugins.lock
+.config/herdr/plugins/**
+.config/herdr/plugins.json
+.config/herdr/release-notes.json
 .config/herdr/session.json
 .config/herdr/session-snapshots/**
 .config/herdr/sessions/**
 .config/nvim/noice.log
+.config/fish/conf.d/fish_frozen_key_bindings.fish
+.config/systemd/user/default.target.wants/**
+.git-credentials
+.yarnrc
 **/__pycache__/**

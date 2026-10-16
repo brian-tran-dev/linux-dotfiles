@@ -1,0 +1,20 @@
+[Unit]
+Description=Clipboard-only bridge for container Neovim
+After=graphical-session.target
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/python3 %h/.config/opencode/helpers/clipboard.py serve
+Restart=on-failure
+RestartSec=2
+TimeoutStartSec=5
+TimeoutStopSec=5
+RuntimeDirectory=opencode-clipboard
+RuntimeDirectoryMode=0700
+RuntimeDirectoryPreserve=yes
+UMask=0077
+NoNewPrivileges=yes
+RestrictAddressFamilies=AF_UNIX
+
+[Install]
+WantedBy=default.target

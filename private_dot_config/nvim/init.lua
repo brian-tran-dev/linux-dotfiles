@@ -2,6 +2,19 @@ local opt = vim.o
 local api = vim.api
 opt.termguicolors = true
 
+-- Read/write the host text clipboard through a scoped socket, not OSC 52 queries.
+if vim.fn.filereadable("/run/.containerenv") == 1 then
+	local helper = vim.fn.expand("~/.config/opencode/helpers/clipboard.py")
+	local copy = { "python3", helper, "copy" }
+	local paste = { "python3", helper, "paste" }
+	vim.g.clipboard = {
+		name = "Host clipboard bridge",
+		copy = { ["+"] = copy, ["*"] = copy },
+		paste = { ["+"] = paste, ["*"] = paste },
+		cache_enabled = 0,
+	}
+end
+
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
 require("config.diagnostic")
@@ -61,6 +74,7 @@ vim.keymap.set("n", "<leader>ww", "<Cmd>w<CR>", { noremap = true, desc = "Save" 
 vim.keymap.set("n", "<leader>wq", "<Cmd>wq<CR>", { noremap = true, desc = "Save & Close" })
 vim.keymap.set("n", "<leader>wa", "<Cmd>wqa<CR>", { noremap = true, desc = "Save & Close All" })
 vim.keymap.set("n", "<leader>qq", "<Cmd>q<CR>", { noremap = true, desc = "Close" })
+vim.keymap.set("n", "<leader>q1", "<Cmd>q!<CR>", { noremap = true, desc = "Force Close" })
 vim.keymap.set("n", "<leader>qa", "<Cmd>qa<CR>", { noremap = true, desc = "Close all" })
 vim.keymap.set("n", "<leader>;;", ":", { noremap = true, desc = "Vim command" })
 vim.keymap.set("n", "<leader>;l", ":lua ", { noremap = true, desc = "Lua command" })

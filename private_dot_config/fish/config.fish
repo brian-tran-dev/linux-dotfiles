@@ -1,3 +1,6 @@
+# Preserve vi mode without tracking Fish's generated upgrade-migration file.
+set --global fish_key_bindings fish_vi_key_bindings
+
 # Install NodeJS
 if test -z "$(fisher list nvm)"
 	fisher install jorgebucaran/nvm.fish
