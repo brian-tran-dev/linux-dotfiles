@@ -38,6 +38,18 @@ return {
 					},
 				},
 			})
+
+			vim.lsp.config("oxlint", {
+				cmd = function(dispatchers, config)
+					local exe = vim.fs.joinpath(config.root_dir, "node_modules", ".bin", "oxlint")
+					if vim.fn.executable(exe) ~= 1 then
+						exe = "oxlint"
+					end
+
+					return vim.lsp.rpc.start({ exe, "--lsp" }, dispatchers, { cwd = config.root_dir })
+				end,
+			})
+			vim.lsp.enable("oxlint")
 		end,
 	},
 	{

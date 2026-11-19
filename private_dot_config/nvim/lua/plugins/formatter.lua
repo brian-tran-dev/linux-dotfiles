@@ -1,3 +1,33 @@
+local oxfmt_configs = { ".oxfmtrc.json", ".oxfmtrc.jsonc" }
+local eslint_configs = {
+	"eslint.config.js",
+	"eslint.config.mjs",
+	"eslint.config.cjs",
+	"eslint.config.ts",
+	"eslint.config.mts",
+	"eslint.config.cts",
+	".eslintrc",
+	".eslintrc.js",
+	".eslintrc.cjs",
+	".eslintrc.json",
+	".eslintrc.yml",
+	".eslintrc.yaml",
+}
+
+local function js_formatters(bufnr)
+	local conform = require("conform")
+
+	if vim.fs.root(bufnr, oxfmt_configs) and conform.get_formatter_info("oxfmt", bufnr).available then
+		return { "oxfmt" }
+	end
+
+	if vim.fs.root(bufnr, eslint_configs) and conform.get_formatter_info("eslint_d", bufnr).available then
+		return { "eslint_d" }
+	end
+
+	return { "prettier" }
+end
+
 return {
 	{
 		"stevearc/conform.nvim",
@@ -5,13 +35,10 @@ return {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = { "eslint_d", "prettier" },
-				javascriptreact = { "eslint_d", "prettier" },
-				typescript = { "eslint_d", "prettier" },
-				typescriptreact = { "eslint_d", "prettier" },
-				ts = { "eslint_d", "prettier" },
-				tsx = { "eslint_d", "prettier" },
-				jsx = { "eslint_d", "prettier" },
+				javascript = js_formatters,
+				javascriptreact = js_formatters,
+				typescript = js_formatters,
+				typescriptreact = js_formatters,
 				html = { "prettier" },
 				css = { "prettier" },
 				scss = { "prettier" },
