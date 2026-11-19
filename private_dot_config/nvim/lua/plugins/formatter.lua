@@ -14,19 +14,8 @@ local eslint_configs = {
 	".eslintrc.yaml",
 }
 
-local function js_formatters(bufnr)
-	local conform = require("conform")
-
-	if vim.fs.root(bufnr, oxfmt_configs) and conform.get_formatter_info("oxfmt", bufnr).available then
-		return { "oxfmt" }
-	end
-
-	if vim.fs.root(bufnr, eslint_configs) and conform.get_formatter_info("eslint_d", bufnr).available then
-		return { "eslint_d" }
-	end
-
-	return { "prettier" }
-end
+-- Mason auto-install needs a table of formatter names, not a function.
+local js_formatters = { "oxfmt", "eslint_d", "prettier", stop_after_first = true }
 
 return {
 	{
@@ -82,6 +71,18 @@ return {
 			local util = require("conform.util")
 
 			conform.setup(opts)
+
+			conform.formatters.oxfmt = {
+				condition = function(_, ctx)
+					return vim.fs.root(ctx.dirname, oxfmt_configs) ~= nil
+				end,
+			}
+
+			conform.formatters.eslint_d = {
+				condition = function(_, ctx)
+					return vim.fs.root(ctx.dirname, eslint_configs) ~= nil
+				end,
+			}
 
 			conform.formatters["biome-format"] = {
 				command = util.from_node_modules("biome"),
